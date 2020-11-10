@@ -11,29 +11,16 @@
 </template>
 
 <script>
-import { headers } from '../config';
+import { getTopics } from '../api/topics';
 
 export default {
   name: 'Topics',
   data: () => ({
     topics: []
   }),
-  mounted(){
-    fetch('https://api.quickbase.com/v1/records/query',
-      {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify({"from":"bqyx3rp8i","select":[1,3,6,7,8,14]})
-      })
-    .then(res => {
-      if(res.ok){
-        return res.json().then(res => {
-          this.topics = res.data;
-        });
-      }
-      return res.json().then(resBody => Promise.reject({status: res.status, ...resBody}));
-    })
-    .catch(err => console.log(err))
+  async mounted(){
+    const { data } = await getTopics();
+    this.topics = data;
   }
 }
 </script>
