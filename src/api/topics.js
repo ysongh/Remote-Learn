@@ -14,5 +14,6 @@ export const getTopics = async () => {
         return data;
     } catch(err) {
         console.error(err)
+        return [];
     }
 }

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import Home from '../components/Home.vue'
 import Topics from '../components/Topics.vue'
+import AddTopic from '../components/AddTopic.vue'
 
 Vue.use(VueRouter)
 
@@ -16,6 +17,11 @@ Vue.use(VueRouter)
     path: '/topics',
     name: 'Topics',
     component: Topics
+  },
+  {
+    path: '/addtopic',
+    name: 'AddTopic',
+    component: AddTopic
   },
 ]
 

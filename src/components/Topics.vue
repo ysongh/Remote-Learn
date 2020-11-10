@@ -1,6 +1,7 @@
 <template>
-  <div class="hello">
+  <div class="container">
     <h1>Topics</h1>
+    <router-link class="btn btn-primary" to="/addtopic">Add Topic</router-link>
     <div v-bind:key="topic[3].value" v-for="topic in topics">
       <h2>{{ topic[6].value }}</h2>
       <p>{{ topic[7].value }}</p>
