@@ -52,7 +52,10 @@ export default {
         detail: this.detail
       }
 
-      addTopicAPI(newTopic);
+      const isSuccess = addTopicAPI(newTopic);
+
+      if(isSuccess) this.$router.push('topics');
+      
     }
   }
 }

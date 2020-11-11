@@ -14,7 +14,7 @@ export const getTopicsAPI = async () => {
 
         return data;
     } catch(err) {
-        console.error(err)
+        console.error(err);
         return [];
     }
 }
@@ -44,11 +44,12 @@ export const addTopicAPI = async (newTopic) => {
                 ]
             })
         });
-        const data = await res.json();
 
-        console.log(data)
+        if (res.ok) {
+            return true
+        }
     } catch(err) {
-        console.error(err)
-        return [];
+        console.error(err);
+        return false;
     }
 }
