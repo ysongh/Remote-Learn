@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { addTopicAPI } from '../api/topics';
 
 export default {
   name: 'AddTopic',
@@ -43,15 +44,15 @@ export default {
   }),
   methods:{
     addTopic(e){
-        e.preventDefault();
+      e.preventDefault();
 
-        const newTopic = { 
-          title: this.title,
-          type: this.type,
-          detail: this.detail
-        }
-        
-        console.log(newTopic);
+      const newTopic = { 
+        title: this.title,
+        type: this.type,
+        detail: this.detail
+      }
+
+      addTopicAPI(newTopic);
     }
   }
 }

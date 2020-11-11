@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { getTopics } from '../api/topics';
+import { getTopicsAPI } from '../api/topics';
 
 export default {
   name: 'Topics',
@@ -20,7 +20,7 @@ export default {
     topics: []
   }),
   async mounted(){
-    const { data } = await getTopics();
+    const { data } = await getTopicsAPI();
     this.topics = data;
   }
 }
