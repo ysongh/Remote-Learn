@@ -54,12 +54,12 @@ export const addTopicAPI = async (newTopic) => {
     }
 }
 
-export const getTopicByIdAPI = async () => {
+export const getTopicByIdAPI = async (id) => {
     try{
         const res = await fetch(url1, {
             method: 'POST',
             headers: headers,
-            body: JSON.stringify({"from":"bqyx3rp8i","where":"{3.CT.'3'}","select":[1,3,6,7,8,14]})
+            body: JSON.stringify({"from":"bqyx3rp8i","where":`{3.CT.${id}}`,"select":[1,3,6,7,8,14]})
         });
         const data = await res.json();
 

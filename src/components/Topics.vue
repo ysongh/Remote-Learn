@@ -7,6 +7,7 @@
       <p>{{ topic[7].value }}</p>
       <p>Likes {{ topic[8].value }} -- {{ topic[14].value }}</p>
       <p>{{ topic[1].value }}</p>
+      <router-link class="btn btn-secondary" :to="{ path: '/topic/'+ topic[3].value}">View</router-link>
     </div>
   </div>
 </template>
