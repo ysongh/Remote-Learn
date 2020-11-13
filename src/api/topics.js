@@ -8,7 +8,17 @@ export const getTopicsAPI = async () => {
         const res = await fetch(url1, {
             method: 'POST',
             headers: headers,
-            body: JSON.stringify({"from":"bqyx3rp8i","select":[1,3,6,7,8,14]})
+            body: JSON.stringify({
+                "from":
+                "bqyx3rp8i",
+                "sortBy": [
+                    {
+                      "fieldId": 1,
+                      "order": "DESC"
+                    },
+                ],
+                "select":[1,3,6,7,8,14]
+            })
         });
         const data = await res.json();
 

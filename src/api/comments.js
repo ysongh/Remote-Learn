@@ -8,7 +8,17 @@ export const getCommentsByTopicAPI = async (id) => {
         const res = await fetch(url1, {
             method: 'POST',
             headers: headers,
-            body: JSON.stringify({"from":"bqy2pidxm","where":`{6.CT.${id}}`,"select":[1,3,6,7]})
+            body: JSON.stringify({
+                "from":"bqy2pidxm",
+                "sortBy": [
+                    {
+                      "fieldId": 1,
+                      "order": "DESC"
+                    },
+                ],
+                "where":`{6.CT.${id}}`,
+                "select":[1,3,6,7]
+            })
         });
         const data = await res.json();
         
