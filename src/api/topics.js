@@ -46,7 +46,7 @@ export const addTopicAPI = async (newTopic) => {
         });
 
         if (res.ok) {
-            return true
+            return true;
         }
     } catch(err) {
         console.error(err);

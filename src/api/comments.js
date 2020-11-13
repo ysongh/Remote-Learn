@@ -1,6 +1,7 @@
 import { headers } from '../config';
 
 const url1 = 'https://api.quickbase.com/v1/records/query';
+const url2 = 'https://api.quickbase.com/v1/records';
 
 export const getCommentsByTopicAPI = async (id) => {
     try{
@@ -15,5 +16,33 @@ export const getCommentsByTopicAPI = async (id) => {
     } catch(err) {
         console.error(err);
         return [];
+    }
+}
+
+export const addCommentAPI = async (id, detail) => {
+    try{
+        const res = await fetch(url2, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify({
+                "to":"bqy2pidxm",
+                "data": [
+                    {
+                        "6": {
+                            "value": id
+                        },
+                        "7": {
+                            "value": detail
+                        }
+                    }
+                ]
+            })
+        });
+        if (res.ok) {
+            return true;
+        }
+    } catch(err) {
+        console.error(err);
+        return false;
     }
 }

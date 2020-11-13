@@ -28,7 +28,7 @@
 
 <script>
 import { getTopicByIdAPI } from '../api/topics';
-import { getCommentsByTopicAPI } from '../api/comments';
+import { getCommentsByTopicAPI, addCommentAPI } from '../api/comments';
 
 export default {
   name: 'TopicDetail',
@@ -45,10 +45,16 @@ export default {
     this.comments = commentData.data;
   },
   methods:{
-    addComment(e){
+    async addComment(e){
       e.preventDefault();
 
-      console.log(this.detail);
+      const isSuccess = await addCommentAPI(this.$route.params.id, this.detail);
+
+      if(isSuccess){
+        const { data } = await getCommentsByTopicAPI(this.$route.params.id);
+        this.comments = data;
+        this.detail = '';
+      }
     }
   }
 }
