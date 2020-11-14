@@ -42,7 +42,7 @@
 <script>
 import moment from 'moment';
 
-import { getTopicsAPI } from '../api/topics';
+import { getTopicsAPI, getTopicsByTypeAPI } from '../api/topics';
 
 export default {
   name: 'Topics',
@@ -54,8 +54,9 @@ export default {
     this.topics = data;
   },
   methods: { 
-    selectType(e){
-      console.log(e.target.value);
+    async selectType(e){
+      const { data } = await getTopicsByTypeAPI(e.target.value);
+      this.topics = data;
     },
     formatDate(value){
       if(value){

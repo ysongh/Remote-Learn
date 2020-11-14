@@ -9,14 +9,39 @@ export const getTopicsAPI = async () => {
             method: 'POST',
             headers: headers,
             body: JSON.stringify({
-                "from":
-                "bqyx3rp8i",
+                "from": "bqyx3rp8i",
                 "sortBy": [
                     {
                       "fieldId": 1,
                       "order": "DESC"
                     },
                 ],
+                "select":[1,3,6,7,8,14]
+            })
+        });
+        const data = await res.json();
+
+        return data;
+    } catch(err) {
+        console.error(err);
+        return [];
+    }
+}
+
+export const getTopicsByTypeAPI = async (type) => {
+    try{
+        const res = await fetch(url1, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify({
+                "from": "bqyx3rp8i",
+                "sortBy": [
+                    {
+                      "fieldId": 1,
+                      "order": "DESC"
+                    },
+                ],
+                "where":`{14.CT.'${type}'}`,
                 "select":[1,3,6,7,8,14]
             })
         });
