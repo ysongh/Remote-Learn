@@ -22,6 +22,7 @@
     <div v-bind:key="comment[3].value" v-for="comment in comments">
       <p>{{ formatDate(comment[1].value, 2) }}</p>
       <p>{{ comment[7].value }}</p>
+      <button class="btn btn-danger" @click="deleteComment(comment[3].value)">X</button>
     </div>
   </div>
 </template>
@@ -30,7 +31,7 @@
 import moment from 'moment';
 
 import { getTopicByIdAPI } from '../api/topics';
-import { getCommentsByTopicAPI, addCommentAPI } from '../api/comments';
+import { getCommentsByTopicAPI, addCommentAPI, deleteCommentAPI } from '../api/comments';
 
 export default {
   name: 'TopicDetail',
@@ -56,6 +57,13 @@ export default {
         const { data } = await getCommentsByTopicAPI(this.$route.params.id);
         this.comments = data;
         this.detail = '';
+      }
+    },
+    async deleteComment(id){
+      const isSuccess = await deleteCommentAPI(id);
+      if(isSuccess){
+        const { data } = await getCommentsByTopicAPI(this.$route.params.id);
+        this.comments = data;
       }
     },
     formatDate(value, type){

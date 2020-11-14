@@ -56,3 +56,23 @@ export const addCommentAPI = async (id, detail) => {
         return false;
     }
 }
+
+export const deleteCommentAPI = async (id) => {
+    try{
+        const res = await fetch(url2, {
+            method: 'DELETE',
+            headers: headers,
+            body: JSON.stringify({
+                "from": "bqy2pidxm",
+                "where": `{3.EX.${id}}`
+            })
+        });
+        console.log(res)
+        if (res.ok) {
+            return true;
+        }
+    } catch(err) {
+        console.error(err);
+        return false;
+    }
+}
