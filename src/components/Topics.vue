@@ -2,6 +2,33 @@
   <div class="container">
     <h1>Topics</h1>
     <router-link class="btn btn-primary" to="/addtopic">Add Topic</router-link>
+
+    <div class="form-check">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="radiotype" value="Programming" @change="selectType">Programming
+      </label>
+    </div>
+    <div class="form-check">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="radiotype" value="Math" @change="selectType">Math
+      </label>
+    </div>
+    <div class="form-check disabled">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="radiotype" value="English" @change="selectType">English
+      </label>
+    </div>
+    <div class="form-check disabled">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="radiotype" value="History" @change="selectType">History
+      </label>
+    </div>
+    <div class="form-check disabled">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="radiotype" value="Science" @change="selectType">Science
+      </label>
+    </div>
+
     <div v-bind:key="topic[3].value" v-for="topic in topics">
       <h2>{{ topic[6].value }}</h2>
       <p>{{ topic[7].value }}</p>
@@ -27,6 +54,9 @@ export default {
     this.topics = data;
   },
   methods: { 
+    selectType(e){
+      console.log(e.target.value);
+    },
     formatDate(value){
       if(value){
         return moment(String(value)).format('MMMM Do YYYY');
