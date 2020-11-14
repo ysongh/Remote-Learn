@@ -17,7 +17,7 @@ export const getCommentsByTopicAPI = async (id) => {
                     },
                 ],
                 "where":`{6.CT.${id}}`,
-                "select":[1,3,6,7]
+                "select":[1,3,6,7,12]
             })
         });
         const data = await res.json();
@@ -43,6 +43,9 @@ export const addCommentAPI = async (id, detail) => {
                         },
                         "7": {
                             "value": detail
+                        },
+                        "12": {
+                            "value": "Guest"
                         }
                     }
                 ]
@@ -67,7 +70,6 @@ export const deleteCommentAPI = async (id) => {
                 "where": `{3.EX.${id}}`
             })
         });
-        console.log(res)
         if (res.ok) {
             return true;
         }

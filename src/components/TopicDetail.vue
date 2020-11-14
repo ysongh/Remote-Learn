@@ -20,7 +20,7 @@
     </form>
 
     <div v-bind:key="comment[3].value" v-for="comment in comments">
-      <p>{{ formatDate(comment[1].value, 2) }}</p>
+      <p>{{ formatDate(comment[1].value, 2) }} by {{ comment[12].value }}</p>
       <p>{{ comment[7].value }}</p>
       <button class="btn btn-danger" @click="deleteComment(comment[3].value)">X</button>
     </div>
