@@ -17,5 +17,6 @@ export default {
 </script>
 
 <style>
-
+  .primary-color{ background-color: #D9D872; }
+  .secondary-color{ background-color: #58B368; }
 </style>

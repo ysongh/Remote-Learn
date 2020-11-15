@@ -18,7 +18,7 @@
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
               <h2>Comments</h2>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentModal">
+              <button type="button" class="btn primary-color btn-lg" data-toggle="modal" data-target="#commentModal">
                 Add
               </button>
             </div>

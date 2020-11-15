@@ -27,7 +27,7 @@
           rows="7"
           v-model="detail"></textarea>    
       </div>
-      <input type="submit" value="Add" class="btn btn-primary">
+      <input type="submit" value="Add" class="btn primary-color btn-lg">
     </form>
   </div>
 </template>

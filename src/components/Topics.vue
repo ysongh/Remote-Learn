@@ -1,8 +1,8 @@
 <template>
   <div class="container mt-3">
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-between align-items-center mb-3">
       <h1>Topics</h1>
-      <router-link class="btn btn-primary" to="/addtopic">Add Topic</router-link>
+      <router-link class="btn primary-color btn-lg" to="/addtopic">Add Topic</router-link>
     </div>
 
     <div class="row">
@@ -36,7 +36,7 @@
 
             <div class="d-flex justify-content-between align-items-center">
               <p class="text-muted">{{ formatDate(topic[1].value) }}</p>
-              <router-link class="btn btn-secondary float-right" :to="{ path: '/topic/'+ topic[3].value}">View</router-link>
+              <router-link class="btn secondary-color float-right" :to="{ path: '/topic/'+ topic[3].value}">View</router-link>
             </div>
           </div>
         </div>
