@@ -11,29 +11,17 @@
             <p>{{ this.topic.length && formatDate(this.topic[0][1].value, 1) }}</p>
           </div>
         </div>
-
-        <div class="card mt-4">
-          <div class="card-body">
-            <h2>Comment</h2>
-              <form @submit="addComment">
-                <div class="form-group">
-                  <textarea
-                    class="form-control"
-                    type="text"
-                    name="detail"
-                    rows="3"
-                    v-model="detail"></textarea>    
-                  </div>
-                <input type="submit" value="Add" class="btn btn-primary">
-              </form>
-          </div>
-        </div>
       </div>
 
       <div class="col-12 col-md-6">
         <div class="card">
           <div class="card-body">
-            <h2>Comments</h2>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h2>Comments</h2>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentModal">
+                Add
+              </button>
+            </div>
             <div v-bind:key="comment[3].value" v-for="comment in comments">
               <div class="d-flex justify-content-between align-items-start">
                 <div>
@@ -48,6 +36,7 @@
         </div>
       </div>
     </div>
+    <CommentModal @add-comment="addComment" :detail.sync="detail"></CommentModal>
   </div>
 </template>
 
@@ -56,9 +45,13 @@ import moment from 'moment';
 
 import { getTopicByIdAPI } from '../api/topics';
 import { getCommentsByTopicAPI, addCommentAPI, deleteCommentAPI } from '../api/comments';
+import CommentModal from './modal/CommentModal';
 
 export default {
   name: 'TopicDetail',
+  components: {
+    CommentModal
+  },
   data: () => ({
     topic: [],
     comments: [],
@@ -72,9 +65,7 @@ export default {
     this.comments = commentData.data;
   },
   methods:{
-    async addComment(e){
-      e.preventDefault();
-
+    async addComment(){
       const isSuccess = await addCommentAPI(this.$route.params.id, this.detail);
 
       if(isSuccess){
