@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <CommentModal @add-comment="addComment" :detail.sync="detail"></CommentModal>
+    <CommentModal @add-comment="addComment" :name.sync="name" :detail.sync="detail"></CommentModal>
   </div>
 </template>
 
@@ -55,6 +55,7 @@ export default {
   data: () => ({
     topic: [],
     comments: [],
+    name: 'Guest',
     detail: ''
   }),
   async mounted(){
@@ -66,7 +67,7 @@ export default {
   },
   methods:{
     async addComment(){
-      const isSuccess = await addCommentAPI(this.$route.params.id, this.detail);
+      const isSuccess = await addCommentAPI(this.$route.params.id, this.name, this.detail);
 
       if(isSuccess){
         const { data } = await getCommentsByTopicAPI(this.$route.params.id);

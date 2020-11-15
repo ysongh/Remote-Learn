@@ -29,7 +29,7 @@ export const getCommentsByTopicAPI = async (id) => {
     }
 }
 
-export const addCommentAPI = async (id, detail) => {
+export const addCommentAPI = async (id, name, detail) => {
     try{
         const res = await fetch(url2, {
             method: 'POST',
@@ -45,7 +45,7 @@ export const addCommentAPI = async (id, detail) => {
                             "value": detail
                         },
                         "12": {
-                            "value": "Guest"
+                            "value": name
                         }
                     }
                 ]
