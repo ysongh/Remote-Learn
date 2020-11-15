@@ -1,22 +1,46 @@
 <template>
-  <div class="container">
-    <h1>Topics</h1>
-    <router-link class="btn btn-primary" to="/addtopic">Add Topic</router-link>
-
-    <div v-bind:key="type" v-for="type of types">
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="radiotype" :value="type" @change="selectType">{{type}}
-        </label>
-      </div>
+  <div class="container mt-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1>Topics</h1>
+      <router-link class="btn btn-primary" to="/addtopic">Add Topic</router-link>
     </div>
 
-    <div v-bind:key="topic[3].value" v-for="topic in topics">
-      <h2>{{ topic[6].value }}</h2>
-      <p>{{ topic[7].value }}</p>
-      <p>Likes {{ topic[8].value }} -- {{ topic[14].value }}</p>
-      <p>{{ formatDate(topic[1].value) }}</p>
-      <router-link class="btn btn-secondary" :to="{ path: '/topic/'+ topic[3].value}">View</router-link>
+    <div class="row">
+      <div class="col-12 col-sm-4 col-md-3">
+        <div class="jumbotron py-4 px-3">
+          <h2 class="h4">Filter by:</h2>
+          <div v-bind:key="type" v-for="type of types">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="radiotype" :value="type" @change="selectType">{{type}}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-8 col-md-9">
+        <div v-bind:key="topic[3].value" v-for="topic in topics">
+          <div class="jumbotron bg-light py-3 px-3">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h2>{{ topic[6].value }} <span class="badge badge-secondary">{{ topic[14].value }}</span></h2>
+                <p>{{ topic[7].value }}</p>
+              </div>
+              
+              <div class="d-flex justify-content-end">
+                <p class="number-size">{{ topic[8].value }}</p>
+                <img class="icon" src="../assets/person-icon.svg" alt="Person">
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <p class="text-muted">{{ formatDate(topic[1].value) }}</p>
+              <router-link class="btn btn-secondary float-right" :to="{ path: '/topic/'+ topic[3].value}">View</router-link>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -52,5 +76,18 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  span{
+    font-size: 1rem;
+    font-weight: 100;
+  }
 
+  .icon{
+    width: 2rem;
+  }
+
+  .number-size{
+    font-size: 1.4rem;
+    margin-top: 8px;
+    margin-right: 4px;
+  }
 </style>
