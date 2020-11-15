@@ -1,28 +1,52 @@
 <template>
-  <div class="container">
-    <h1>Topics Detail</h1>
-    <h2>{{ this.topic.length && this.topic[0][6].value  }}</h2>
-    <p>{{ this.topic.length && this.topic[0][7].value }}</p>
-    <p>Likes {{ this.topic.length && this.topic[0][8].value }} -- {{ this.topic.length && this.topic[0][14].value }}</p>
-    <p>{{ this.topic.length && formatDate(this.topic[0][1].value, 1) }}</p>
-
-    <h2>Comment</h2>
-    <form @submit="addComment">
-      <div class="form-group">
-        <textarea
-          class="form-control"
-          type="text"
-          name="detail"
-          rows="3"
-          v-model="detail"></textarea>    
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h1>Topics Detail</h1>
+            <h2>{{ this.topic.length && this.topic[0][6].value  }}</h2>
+            <p>{{ this.topic.length && this.topic[0][7].value }}</p>
+            <p>Likes {{ this.topic.length && this.topic[0][8].value }} -- {{ this.topic.length && this.topic[0][14].value }}</p>
+            <p>{{ this.topic.length && formatDate(this.topic[0][1].value, 1) }}</p>
+          </div>
         </div>
-      <input type="submit" value="Add" class="btn btn-primary">
-    </form>
 
-    <div v-bind:key="comment[3].value" v-for="comment in comments">
-      <p>{{ formatDate(comment[1].value, 2) }} by {{ comment[12].value }}</p>
-      <p>{{ comment[7].value }}</p>
-      <button class="btn btn-danger" @click="deleteComment(comment[3].value)">X</button>
+        <div class="card mt-4">
+          <div class="card-body">
+            <h2>Comment</h2>
+              <form @submit="addComment">
+                <div class="form-group">
+                  <textarea
+                    class="form-control"
+                    type="text"
+                    name="detail"
+                    rows="3"
+                    v-model="detail"></textarea>    
+                  </div>
+                <input type="submit" value="Add" class="btn btn-primary">
+              </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h2>Comments</h2>
+            <div v-bind:key="comment[3].value" v-for="comment in comments">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <p>{{ formatDate(comment[1].value, 2) }} by {{ comment[12].value }}</p>
+                  <p>{{ comment[7].value }}</p>
+                </div>
+                <button class="btn btn-danger" @click="deleteComment(comment[3].value)">X</button>
+              </div>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
