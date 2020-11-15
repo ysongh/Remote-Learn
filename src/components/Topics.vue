@@ -3,30 +3,12 @@
     <h1>Topics</h1>
     <router-link class="btn btn-primary" to="/addtopic">Add Topic</router-link>
 
-    <div class="form-check">
-      <label class="form-check-label">
-        <input type="radio" class="form-check-input" name="radiotype" value="Programming" @change="selectType">Programming
-      </label>
-    </div>
-    <div class="form-check">
-      <label class="form-check-label">
-        <input type="radio" class="form-check-input" name="radiotype" value="Math" @change="selectType">Math
-      </label>
-    </div>
-    <div class="form-check disabled">
-      <label class="form-check-label">
-        <input type="radio" class="form-check-input" name="radiotype" value="English" @change="selectType">English
-      </label>
-    </div>
-    <div class="form-check disabled">
-      <label class="form-check-label">
-        <input type="radio" class="form-check-input" name="radiotype" value="History" @change="selectType">History
-      </label>
-    </div>
-    <div class="form-check disabled">
-      <label class="form-check-label">
-        <input type="radio" class="form-check-input" name="radiotype" value="Science" @change="selectType">Science
-      </label>
+    <div v-bind:key="type" v-for="type of types">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="radiotype" :value="type" @change="selectType">{{type}}
+        </label>
+      </div>
     </div>
 
     <div v-bind:key="topic[3].value" v-for="topic in topics">
@@ -47,6 +29,7 @@ import { getTopicsAPI, getTopicsByTypeAPI } from '../api/topics';
 export default {
   name: 'Topics',
   data: () => ({
+    types: ["Programming", "Math", "English", "History", "Science", "Music"],
     topics: []
   }),
   async mounted(){
