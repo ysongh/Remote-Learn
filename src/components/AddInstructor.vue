@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import { addInstructorAPI } from '../api/instructors';
 
 export default {
   name: 'AddTopic',
@@ -71,8 +72,10 @@ export default {
         time: this.time,
         link: this.link
       }
-      
-      console.log(newInstructor)
+
+      const isSuccess = await addInstructorAPI(this.$route.params.id, newInstructor);
+
+      if(isSuccess) this.$router.push('/topic/' + this.$route.params.id);
     }
   }
 }
