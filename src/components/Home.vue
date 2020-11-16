@@ -14,6 +14,68 @@
         </div>
       </div>
     </header>
+
+    <main class="container">
+      <section class="howitworks my-5">
+        <h2 class="h1 text-center">How Remote Learn Works?</h2>
+
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <img src="../assets/howitworks3.svg" alt="Suggest topic">
+          </div>
+          <div class="col-12 col-md-6">
+            <p>Suggest a Task for someone to teach</p>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <img src="../assets/howitworks1.svg" alt="Wait for instructor">
+          </div>
+          <div class="col-12 col-md-6">
+            <p>Wait for instructor to apply and set the date and the link to join</p>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <img src="../assets/howitworks2.svg" alt="Join the meeting">
+          </div>
+          <div class="col-12 col-md-6">
+            <p>Join the meeting and learn</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="whyyouteach my-5">
+        <h2 class="h1 text-center mb-4">Why should you teach?</h2>
+
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card mb-3">
+              <div class="card-body">
+                  <img src="../assets/whyyouteach3.svg" alt="Icon">
+                  <p class="card-title text-center mt-3">Get Experinece</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card mb-3">
+              <div class="card-body">
+                  <img src="../assets/whyyouteach1.svg" alt="Icon">
+                  <p class="card-title text-center mt-3">Promte yourself</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card mb-3">
+              <div class="card-body">
+                  <img src="../assets/whyyouteach2.svg" alt="Icon">
+                  <p class="card-title text-center mt-3">Earn Tips</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
 </template>
 
@@ -43,6 +105,22 @@ export default {
 
   header img{
     margin-left: 1rem;
+  }
+
+  .howitworks p{
+    font-size: 2rem;
+    font-weight: 200;
+    margin-top: 5rem;
+  }
+
+  .whyyouteach img{
+    display: block;
+    margin: auto;
+  }
+
+  .whyyouteach p{
+    font-size: 1.8rem;
+    font-weight: 200;
   }
 
 </style>
