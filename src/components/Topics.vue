@@ -58,27 +58,30 @@
 <script>
 import moment from 'moment';
 
-import { getTopicsAPI, getTopicsByTypeAPI } from '../api/topics';
+import { getTopicsAPI } from '../api/topics';
 
 export default {
   name: 'Topics',
   data: () => ({
     types: ["Programming", "Math", "English", "History", "Science", "Music"],
+    filter: null,
     topics: [],
     totalTopics: 0
   }),
   async mounted(){
-    const topicData = await getTopicsAPI(0);
+    const topicData = await getTopicsAPI(0, this.filter);
     this.topics = topicData.data;
     this.totalTopics = Math.ceil(topicData.metadata.totalRecords / 3);
   },
   methods: { 
     async selectType(e){
-      const { data } = await getTopicsByTypeAPI(e.target.value);
-      this.topics = data;
+      const topicData = await getTopicsAPI(0, e.target.value);
+      this.filter = e.target.value;
+      this.topics = topicData.data;
+      this.totalTopics = Math.ceil(topicData.metadata.totalRecords / 3);
     },
     async pagination(num){
-      const { data } = await getTopicsAPI(num);
+      const { data } = await getTopicsAPI(num, this.filter);
       this.topics = data;
     },
     formatDate(value){
