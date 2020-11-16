@@ -2,7 +2,9 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <li class="navbar-brand" data-toggle="collapse" data-target=".navbar-collapse.show">
-                <router-link class="nav-link" to="/">Remote Learn</router-link>
+                <router-link class="nav-link" to="/">
+                    <img src="../../assets/logo.png" alt="Logo">
+                </router-link>
             </li>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -29,5 +31,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+    img{
+        width: 5rem;
+    }
 </style>
