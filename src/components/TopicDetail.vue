@@ -10,7 +10,7 @@
             </div>
             <p>{{ this.topic.length && this.topic[0][7].value }}</p>
             <p class="text-muted">{{ this.topic.length && formatDate(this.topic[0][1].value, 1) }}</p>
-            <button class="btn primary-color btn-block btn-lg">Apply to Teach</button>
+            <router-link class="btn primary-color btn-block btn-lg" :to="{ path: '/addinstructor/' + this.$route.params.id}">Apply to Teach</router-link>
           </div>
         </div>
 
