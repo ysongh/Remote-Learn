@@ -15,6 +15,9 @@
                         <router-link class="nav-link" to="/">Home</router-link>
                     </li>
                     <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                        <router-link class="nav-link" to="/">About</router-link>
+                    </li>
+                    <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <router-link class="nav-link" to="/topics">Topics</router-link>
                     </li>
                 </ul>
