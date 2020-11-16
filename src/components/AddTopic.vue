@@ -1,34 +1,36 @@
 <template>
-  <div class="container">
-    <h1>Add Topic</h1>
-    <form @submit="addTopic">
-      <div class="form-group">
-        <label class="font-weight-bold">Title</label>
-        <input
-          class="form-control"
-          type="text"
-          name="title"
-          v-model="title">
-      </div>
-      <div class="form-group">
-        <label class="font-weight-bold">Type</label>
-        <input
-          class="form-control"
-          type="text"
-          name="type"
-          v-model="type">
-      </div>
-      <div class="form-group">
-        <label class="font-weight-bold">Detail</label>
-        <textarea
-          class="form-control"
-          type="text"
-          name="detail"
-          rows="7"
-          v-model="detail"></textarea>    
-      </div>
-      <input type="submit" value="Add" class="btn primary-color btn-lg">
-    </form>
+  <div class="container mt-4">
+    <div class="card w-50 m-auto">
+      <h2 class="card-header primary-color text-center py-4">Add Topic</h2>
+      <form class="card-body px-5" @submit="addTopic">
+        <div class="form-group">
+          <label class="font-weight-bold">Title</label>
+          <input
+            class="form-control"
+            type="text"
+            name="title"
+            v-model="title">
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold">Type</label>
+          <input
+            class="form-control"
+            type="text"
+            name="type"
+            v-model="type">
+        </div>
+        <div class="form-group">
+          <label class="font-weight-bold">Detail</label>
+          <textarea
+            class="form-control"
+            type="text"
+            name="detail"
+            rows="7"
+            v-model="detail"></textarea>    
+        </div>
+        <input type="submit" value="Add" class="btn primary-color btn-block btn-lg">
+      </form>
+    </div>
   </div>
 </template>
 
@@ -43,7 +45,7 @@ export default {
     detail: ""
   }),
   methods:{
-    addTopic(e){
+    async addTopic(e){
       e.preventDefault();
 
       const newTopic = { 
@@ -52,7 +54,7 @@ export default {
         detail: this.detail
       }
 
-      const isSuccess = addTopicAPI(newTopic);
+      const isSuccess = await addTopicAPI(newTopic);
 
       if(isSuccess) this.$router.push('topics');
       
@@ -63,5 +65,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  
 </style>
