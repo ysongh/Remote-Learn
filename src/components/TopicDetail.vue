@@ -1,19 +1,21 @@
 <template>
   <div class="container mt-4">
     <div class="row">
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-5">
         <div class="card">
           <div class="card-body">
-            <h1>Topics Detail</h1>
-            <h2>{{ this.topic.length && this.topic[0][6].value  }}</h2>
+            <div class="d-flex justify-content-between align-items-center">
+              <h1>{{ this.topic.length && this.topic[0][6].value  }}</h1>
+              <span class="badge badge-secondary">{{ this.topic[0][14].value }}</span>
+            </div>
             <p>{{ this.topic.length && this.topic[0][7].value }}</p>
-            <p>Likes {{ this.topic.length && this.topic[0][8].value }} -- {{ this.topic.length && this.topic[0][14].value }}</p>
-            <p>{{ this.topic.length && formatDate(this.topic[0][1].value, 1) }}</p>
+            <p class="text-muted">{{ this.topic.length && formatDate(this.topic[0][1].value, 1) }}</p>
+            <button class="btn primary-color btn-block btn-lg">Apply to Teach</button>
           </div>
         </div>
       </div>
 
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-7">
         <div class="card">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -24,9 +26,12 @@
             </div>
             <div v-bind:key="comment[3].value" v-for="comment in comments">
               <div class="d-flex justify-content-between align-items-start">
-                <div>
-                  <p>{{ formatDate(comment[1].value, 2) }} by {{ comment[12].value }}</p>
-                  <p>{{ comment[7].value }}</p>
+                <div class="d-flex align-items-start">
+                  <img src="../assets/defaultuser.png" alt="User">
+                  <div>
+                    <p>{{ comment[7].value }}</p>
+                    <p class="text-muted">{{ formatDate(comment[1].value, 2) }} by {{ comment[12].value }}</p>
+                  </div>
                 </div>
                 <button class="btn btn-danger" @click="deleteComment(comment[3].value)">X</button>
               </div>
@@ -94,5 +99,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  img{
+    width: 5rem;
+    margin-right: .7rem;
+  }
 </style>
