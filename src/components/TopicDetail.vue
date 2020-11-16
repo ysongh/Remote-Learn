@@ -2,15 +2,31 @@
   <div class="container mt-4">
     <div class="row">
       <div class="col-12 col-md-5">
-        <div class="card">
+        <div class="card mb-3">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
               <h1>{{ this.topic.length && this.topic[0][6].value  }}</h1>
-              <span class="badge badge-secondary">{{ this.topic[0][14].value }}</span>
+              <span class="badge badge-secondary">{{ this.topic.length && this.topic[0][14].value }}</span>
             </div>
             <p>{{ this.topic.length && this.topic[0][7].value }}</p>
             <p class="text-muted">{{ this.topic.length && formatDate(this.topic[0][1].value, 1) }}</p>
             <button class="btn primary-color btn-block btn-lg">Apply to Teach</button>
+          </div>
+        </div>
+
+        <div class="card mb-3">
+          <div class="card-body">
+            <h2>Instructor</h2>
+            <div v-bind:key="instructor[3].value" v-for="instructor in instructors">
+              <div class="d-flex align-items-start">
+                <img src="../assets/defaultuser.png" alt="User">
+                <div>
+                  <p>{{ instructor[7].value }}</p>
+                  <p>Start: {{ instructor[10].value }} at {{ instructor[12].value }}</p>
+                  <p>Link: {{ instructor[14].value }}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -50,6 +66,7 @@ import moment from 'moment';
 
 import { getTopicByIdAPI } from '../api/topics';
 import { getCommentsByTopicAPI, addCommentAPI, deleteCommentAPI } from '../api/comments';
+import { getInstructorByTopicAPI } from '../api/instructors';
 import CommentModal from './modal/CommentModal';
 
 export default {
@@ -59,6 +76,7 @@ export default {
   },
   data: () => ({
     topic: [],
+    instructors: [],
     comments: [],
     name: 'Guest',
     detail: ''
@@ -66,6 +84,9 @@ export default {
   async mounted(){
     const { data } = await getTopicByIdAPI(this.$route.params.id);
     this.topic = data;
+
+    const instructorsData = await getInstructorByTopicAPI(this.$route.params.id);
+    this.instructors = instructorsData.data;
 
     const commentData = await getCommentsByTopicAPI(this.$route.params.id);
     this.comments = commentData.data;
