@@ -21,7 +21,7 @@
 
       <div class="col-12 col-sm-8 col-md-9">
         <div v-bind:key="topic[3].value" v-for="topic in topics">
-          <div class="jumbotron bg-light py-3 px-3">
+          <div class="jumbotron bg-light py-2 px-3 mb-3">
             <div class="d-flex justify-content-between">
               <div>
                 <h2>{{ topic[6].value }} <span class="badge badge-secondary">{{ topic[14].value }}</span></h2>
@@ -40,6 +40,16 @@
             </div>
           </div>
         </div>
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <div v-bind:key="n" v-for="n in this.totalTopics">
+              <li class="page-item mr-2">
+                <button class="page-link" v-on:click="pagination(n - 1)">{{ n }}</button>
+              </li>
+            </div>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
@@ -54,15 +64,21 @@ export default {
   name: 'Topics',
   data: () => ({
     types: ["Programming", "Math", "English", "History", "Science", "Music"],
-    topics: []
+    topics: [],
+    totalTopics: 0
   }),
   async mounted(){
-    const { data } = await getTopicsAPI();
-    this.topics = data;
+    const topicData = await getTopicsAPI(0);
+    this.topics = topicData.data;
+    this.totalTopics = Math.ceil(topicData.metadata.totalRecords / 3);
   },
   methods: { 
     async selectType(e){
       const { data } = await getTopicsByTypeAPI(e.target.value);
+      this.topics = data;
+    },
+    async pagination(num){
+      const { data } = await getTopicsAPI(num);
       this.topics = data;
     },
     formatDate(value){

@@ -3,7 +3,7 @@ import { headers } from '../config';
 const url1 = 'https://api.quickbase.com/v1/records/query';
 const url2 = 'https://api.quickbase.com/v1/records';
 
-export const getTopicsAPI = async () => {
+export const getTopicsAPI = async (page) => {
     try{
         const res = await fetch(url1, {
             method: 'POST',
@@ -16,7 +16,11 @@ export const getTopicsAPI = async () => {
                       "order": "DESC"
                     },
                 ],
-                "select":[1,3,6,7,8,14]
+                "select":[1,3,6,7,8,14],
+                "options": {
+                    "skip": page * 3,
+                    "top": 3,
+                }
             })
         });
         const data = await res.json();
