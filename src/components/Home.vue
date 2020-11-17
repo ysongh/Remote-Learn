@@ -24,7 +24,7 @@
             <img src="../assets/howitworks3.svg" alt="Suggest topic">
           </div>
           <div class="col-12 col-md-6">
-            <p>Suggest a Task for someone to teach</p>
+            <p>Suggest a topic for someone to teach</p>
           </div>
 
           <div class="col-12 col-md-6">

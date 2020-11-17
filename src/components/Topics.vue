@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-3">
+  <div class="main container mt-3">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h1>Topics</h1>
       <router-link class="btn primary-color btn-lg" to="/addtopic">Add Topic</router-link>
@@ -98,6 +98,10 @@ export default {
   span{
     font-size: 1rem;
     font-weight: 100;
+  }
+
+  .main{
+    min-height: 70vh;
   }
 
   .icon{

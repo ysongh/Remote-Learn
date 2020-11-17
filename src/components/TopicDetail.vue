@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-4">
+  <div class="main container mt-4">
     <div class="row">
       <div class="col-12 col-md-5">
         <div class="card mb-3">
@@ -123,5 +123,9 @@ export default {
   img{
     width: 5rem;
     margin-right: .7rem;
+  }
+  
+  .main{
+    min-height: 70vh;
   }
 </style>
