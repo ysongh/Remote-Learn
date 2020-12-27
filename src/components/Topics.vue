@@ -20,25 +20,30 @@
       </div>
 
       <div class="col-12 col-sm-8 col-md-9">
-        <div v-bind:key="topic[3].value" v-for="topic in topics">
-          <div class="jumbotron bg-light py-2 px-3 mb-3">
-            <div class="d-flex justify-content-between">
-              <div>
-                <h2>{{ topic[6].value }} <span class="badge badge-secondary">{{ topic[14].value }}</span></h2>
-                <p>{{ topic[7].value }}</p>
+        <div v-if="loading">
+          <div v-bind:key="topic[3].value" v-for="topic in topics">
+            <div class="jumbotron bg-light py-2 px-3 mb-3">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <h2>{{ topic[6].value }} <span class="badge badge-secondary">{{ topic[14].value }}</span></h2>
+                  <p>{{ topic[7].value }}</p>
+                </div>
+                
+                <div class="d-flex justify-content-end">
+                  <p class="number-size">{{ topic[8].value }}</p>
+                  <img class="icon" src="../assets/person-icon.svg" alt="Person">
+                </div>
               </div>
-              
-              <div class="d-flex justify-content-end">
-                <p class="number-size">{{ topic[8].value }}</p>
-                <img class="icon" src="../assets/person-icon.svg" alt="Person">
-              </div>
-            </div>
 
-            <div class="d-flex justify-content-between align-items-center">
-              <p class="text-muted">{{ formatDate(topic[1].value) }}</p>
-              <router-link class="btn secondary-color float-right" :to="{ path: '/topic/'+ topic[3].value}">View</router-link>
+              <div class="d-flex justify-content-between align-items-center">
+                <p class="text-muted">{{ formatDate(topic[1].value) }}</p>
+                <router-link class="btn secondary-color float-right" :to="{ path: '/topic/'+ topic[3].value}">View</router-link>
+              </div>
             </div>
           </div>
+        </div>
+        <div v-else>
+          <p class="display-4">Loading</p>
         </div>
 
         <nav aria-label="Page navigation example">
@@ -66,12 +71,14 @@ export default {
     types: ["Programming", "Math", "English", "History", "Science", "Music"],
     filter: null,
     topics: [],
-    totalTopics: 0
+    totalTopics: 0,
+    loading: false
   }),
   async mounted(){
     const topicData = await getTopicsAPI(0, this.filter);
     this.topics = topicData.data;
     this.totalTopics = Math.ceil(topicData.metadata.totalRecords / 3);
+    this.loading = true;
   },
   methods: { 
     async selectType(e){
