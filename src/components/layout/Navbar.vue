@@ -20,6 +20,9 @@
                     <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <router-link class="nav-link" to="/topics">Topics</router-link>
                     </li>
+                    <li class="nav-item">
+                        <p class="mt-2">{{ address }}</p>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -27,8 +30,24 @@
 </template>
 
 <script>
+import Portis from '@portis/web3';
+import Web3 from 'web3';
+import { portisId } from '../../config';
+
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  data: () => ({
+    address: ''
+  }),
+  mounted(){
+    const portis = new Portis(portisId, 'mainnet');
+    const web3 = new Web3(portis.provider);
+
+    web3.eth.getAccounts((error, accounts) => {
+        this.address = accounts[0];
+    });
+
+  }
 }
 </script>
 
