@@ -41,20 +41,20 @@
               </div>
             </div>
           </div>
+
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <div v-bind:key="n" v-for="n in this.totalTopics">
+                <li class="page-item mr-2">
+                  <button class="page-link" v-on:click="pagination(n - 1)">{{ n }}</button>
+                </li>
+              </div>
+            </ul>
+          </nav>
         </div>
         <div v-else>
-          <p class="display-4">Loading</p>
+          <Spinner />
         </div>
-
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <div v-bind:key="n" v-for="n in this.totalTopics">
-              <li class="page-item mr-2">
-                <button class="page-link" v-on:click="pagination(n - 1)">{{ n }}</button>
-              </li>
-            </div>
-          </ul>
-        </nav>
       </div>
     </div>
   </div>
@@ -64,9 +64,13 @@
 import moment from 'moment';
 
 import { getTopicsAPI } from '../api/topics';
+import Spinner from './common/Spinner';
 
 export default {
   name: 'Topics',
+  components: {
+    Spinner
+  },
   data: () => ({
     types: ["Programming", "Math", "English", "History", "Science", "Music"],
     filter: null,
