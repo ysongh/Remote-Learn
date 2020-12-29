@@ -32,19 +32,19 @@
 <script>
 import Portis from '@portis/web3';
 import Web3 from 'web3';
+import { mapGetters } from 'vuex';
+
 import { portisId } from '../../config';
 
 export default {
   name: 'Navbar',
-  data: () => ({
-    address: ''
-  }),
+  computed: mapGetters(['address']),
   mounted(){
     const portis = new Portis(portisId, 'mainnet');
     const web3 = new Web3(portis.provider);
 
     web3.eth.getAccounts((error, accounts) => {
-        this.address = accounts[0];
+        console.log(accounts[0]);
     });
 
   }
