@@ -30,24 +30,16 @@
 </template>
 
 <script>
-import Portis from '@portis/web3';
-import Web3 from 'web3';
-import { mapGetters, mapActions } from 'vuex';
 
-import { portisId } from '../../config';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Navbar',
-  computed: mapGetters(['address']),
-  methods: mapActions(['updateAddress']),
+  computed: mapGetters(['address', 'portis']),
+  methods: mapActions(['getPortis']),
   mounted(){
-    const portis = new Portis(portisId, 'mainnet');
-    const web3 = new Web3(portis.provider);
-
-    web3.eth.getAccounts((error, accounts) => {
-        this.updateAddress(accounts[0]);
-    });
-
+      this.getPortis();
+      console.log(this.portis);
   }
 }
 </script>
