@@ -1,18 +1,24 @@
 const state = {
-	address: '0x0'
+	address: ''
 };
 
 const getters = {
 	address: state => state.address
 };
 
-const actions = {};
+const actions = {
+	updateAddress({ commit }, address){
+		commit('setAddress', address);
+	}
+};
 
-const mutation = {};
+const mutations = {
+	setAddress: (state, address) => (state.address = address)
+};
 
 export default{
 	state,
 	getters,
 	actions,
-	mutation
+	mutations
 }
