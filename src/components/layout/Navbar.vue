@@ -22,7 +22,7 @@
                     </li>
                 </ul>
                 <div v-if="address">
-                    <p class="mt-3">{{ address }}</p>
+                    <button class="btn primary-color">{{ address.substring(0,7)}}...{{ address.substring(35,42) }}</button>
                 </div>
                 <div v-else>
                     <button class="btn primary-color" @click="getPortis()">Open Wallet</button>
