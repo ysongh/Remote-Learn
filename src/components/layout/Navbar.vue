@@ -25,7 +25,7 @@
                     <p class="mt-3">{{ address }}</p>
                 </div>
                 <div v-else>
-                    <button class="btn primary-color">Open Wallet</button>
+                    <button class="btn primary-color" @click="getPortis()">Open Wallet</button>
                 </div>
             </div>
         </div>
@@ -39,11 +39,7 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'Navbar',
   computed: mapGetters(['address', 'portis']),
-  methods: mapActions(['getPortis']),
-  mounted(){
-      this.getPortis();
-      console.log(this.portis);
-  }
+  methods: mapActions(['getPortis'])
 }
 </script>
 
