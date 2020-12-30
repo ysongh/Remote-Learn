@@ -15,7 +15,7 @@ const getters = {
 
 const actions = {
 	getPortis({ commit }){
-		const portis = new Portis(portisId, 'mainnet');
+		const portis = new Portis(portisId, 'kovan');
 		commit('setPortis', portis);
 
 		const web3 = new Web3(portis.provider);
