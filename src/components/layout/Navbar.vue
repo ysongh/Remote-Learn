@@ -10,7 +10,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <router-link class="nav-link" to="/">Home</router-link>
                     </li>
@@ -20,10 +20,13 @@
                     <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <router-link class="nav-link" to="/topics">Topics</router-link>
                     </li>
-                    <li class="nav-item">
-                        <p class="mt-2">{{ address }}</p>
-                    </li>
                 </ul>
+                <div v-if="address">
+                    <p class="mt-3">{{ address }}</p>
+                </div>
+                <div v-else>
+                    <button class="btn primary-color">Open Wallet</button>
+                </div>
             </div>
         </div>
     </nav>
