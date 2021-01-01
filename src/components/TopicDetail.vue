@@ -25,11 +25,10 @@
                     <p>{{ instructor[7].value }}</p>
                     <p>Start: {{ instructor[10].value }} at {{ instructor[12].value }}</p>
                     <p>Link: {{ instructor[14].value }}</p>
-                    <p>Link: {{ instructor[16].value }}</p>
                   </div>
                 </div>
                 <div v-if="instructor[16].value">
-                  <button class="btn secondary-color btn-lg" @click="getAddress(instructor[16].value)">Tip</button>
+                  <button class="btn secondary-color btn-lg" @click="tipInstructor(instructor[16].value)">Tip</button>
                 </div>
                 
               </div>
@@ -70,6 +69,7 @@
 
 <script>
 import moment from 'moment';
+import { mapGetters } from 'vuex';
 
 import { getTopicByIdAPI } from '../api/topics';
 import { getCommentsByTopicAPI, addCommentAPI, deleteCommentAPI } from '../api/comments';
@@ -81,6 +81,7 @@ export default {
   components: {
     CommentModal
   },
+  computed: mapGetters(['address', 'blockchain']),
   data: () => ({
     topic: [],
     instructors: [],
@@ -115,8 +116,8 @@ export default {
         this.comments = data;
       }
     },
-    getAddress(address){
-      console.log(address);
+    async tipInstructor(instructorAddress){
+      await this.blockchain.methods.tipInstructor(instructorAddress).send({ from: this.address, value: window.web3.utils.toWei('.01', 'Ether')});
     },
     formatDate(value, type){
       if(value){
