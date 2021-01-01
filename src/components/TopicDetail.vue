@@ -28,7 +28,9 @@
                   </div>
                 </div>
                 <div v-if="instructor[16].value">
-                  <button class="btn secondary-color btn-lg" @click="tipInstructor(instructor[16].value)">Tip</button>
+                  <button class="btn secondary-color btn-lg" data-toggle="modal" data-target="#tipModal" @click="setInstructorAddress(instructor[16].value)">
+                    Tip
+                  </button>
                 </div>
                 
               </div>
@@ -64,6 +66,7 @@
       </div>
     </div>
     <CommentModal @add-comment="addComment" :name.sync="name" :detail.sync="detail"></CommentModal>
+    <TipModal @tip-instructor="tipInstructor" :amount.sync="amount"></TipModal>
   </div>
 </template>
 
@@ -75,11 +78,13 @@ import { getTopicByIdAPI } from '../api/topics';
 import { getCommentsByTopicAPI, addCommentAPI, deleteCommentAPI } from '../api/comments';
 import { getInstructorByTopicAPI } from '../api/instructors';
 import CommentModal from './modal/CommentModal';
+import TipModal from './modal/TipModal';
 
 export default {
   name: 'TopicDetail',
   components: {
-    CommentModal
+    CommentModal,
+    TipModal
   },
   computed: mapGetters(['address', 'blockchain']),
   data: () => ({
@@ -87,7 +92,9 @@ export default {
     instructors: [],
     comments: [],
     name: 'Guest',
-    detail: ''
+    detail: '',
+    instructorAddress: '',
+    amount: ''
   }),
   async mounted(){
     const { data } = await getTopicByIdAPI(this.$route.params.id);
@@ -116,8 +123,12 @@ export default {
         this.comments = data;
       }
     },
-    async tipInstructor(instructorAddress){
-      await this.blockchain.methods.tipInstructor(instructorAddress).send({ from: this.address, value: window.web3.utils.toWei('.01', 'Ether')});
+    async tipInstructor(){
+      await this.blockchain.methods.tipInstructor(this.instructorAddress)
+        .send({ from: this.address, value: window.web3.utils.toWei(this.amount.toString(), 'Ether')});
+    },
+    setInstructorAddress(instructorAddress){
+      this.instructorAddress = instructorAddress;
     },
     formatDate(value, type){
       if(value){
