@@ -18,13 +18,20 @@
           <div class="card-body">
             <h2>Instructor</h2>
             <div v-bind:key="instructor[3].value" v-for="instructor in instructors">
-              <div class="d-flex align-items-start mb-3">
-                <img src="../assets/defaultuser.png" alt="User">
-                <div class="instructor-info">
-                  <p>{{ instructor[7].value }}</p>
-                  <p>Start: {{ instructor[10].value }} at {{ instructor[12].value }}</p>
-                  <p>Link: {{ instructor[14].value }}</p>
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                  <img src="../assets/defaultuser.png" alt="User">
+                  <div class="instructor-info">
+                    <p>{{ instructor[7].value }}</p>
+                    <p>Start: {{ instructor[10].value }} at {{ instructor[12].value }}</p>
+                    <p>Link: {{ instructor[14].value }}</p>
+                    <p>Link: {{ instructor[16].value }}</p>
+                  </div>
                 </div>
+                <div v-if="instructor[16].value">
+                  <button class="btn secondary-color btn-lg" @click="getAddress(instructor[16].value)">Tip</button>
+                </div>
+                
               </div>
             </div>
           </div>
@@ -107,6 +114,9 @@ export default {
         const { data } = await getCommentsByTopicAPI(this.$route.params.id);
         this.comments = data;
       }
+    },
+    getAddress(address){
+      console.log(address);
     },
     formatDate(value, type){
       if(value){
