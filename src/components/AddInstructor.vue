@@ -43,6 +43,14 @@
             name="link"
             v-model="link">
         </div>
+        <div class="form-group">
+          <label class="font-weight-bold">Wallet Address</label>
+          <input
+            class="form-control"
+            type="text"
+            name="link"
+            v-model="address">
+        </div>
         <input type="submit" value="Add" class="btn primary-color btn-block btn-lg">
       </form>
     </div>
@@ -59,7 +67,8 @@ export default {
     email: "",
     date: "",
     time: "",
-    link: ""
+    link: "",
+    address: ""
   }),
   methods:{
     async addTopic(e){
@@ -70,7 +79,8 @@ export default {
         email: this.email,
         date: this.date,
         time: this.time,
-        link: this.link
+        link: this.link,
+        address: this.address
       }
 
       const isSuccess = await addInstructorAPI(this.$route.params.id, newInstructor);

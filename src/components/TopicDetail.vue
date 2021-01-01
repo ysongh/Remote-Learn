@@ -18,9 +18,9 @@
           <div class="card-body">
             <h2>Instructor</h2>
             <div v-bind:key="instructor[3].value" v-for="instructor in instructors">
-              <div class="d-flex align-items-start">
+              <div class="d-flex align-items-start mb-3">
                 <img src="../assets/defaultuser.png" alt="User">
-                <div>
+                <div class="instructor-info">
                   <p>{{ instructor[7].value }}</p>
                   <p>Start: {{ instructor[10].value }} at {{ instructor[12].value }}</p>
                   <p>Link: {{ instructor[14].value }}</p>
@@ -125,7 +125,7 @@ export default {
     margin-right: .7rem;
   }
   
-  .main{
-    min-height: 70vh;
-  }
+  .main{ min-height: 70vh; }
+
+  .instructor-info p{ margin-bottom: 3px; }
 </style>

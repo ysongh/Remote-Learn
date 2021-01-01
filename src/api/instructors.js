@@ -55,6 +55,9 @@ export const addInstructorAPI = async (id, newInstructor) => {
                         },
                         "14": {
                           "value": newInstructor.link
+                        },
+                        "16": {
+                          "value": newInstructor.address
                         }
                       }
                 ]
