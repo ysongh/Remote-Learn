@@ -45,8 +45,11 @@
           <nav aria-label="Page navigation example">
             <ul class="pagination">
               <div v-bind:key="n" v-for="n in this.totalTopics">
-                <li class="page-item mr-2">
+                <li v-if="n === currentPage" class="page-item active mr-2">
                   <button class="page-link" v-on:click="pagination(n - 1)">{{ n }}</button>
+                </li>
+                <li v-else class="page-item mr-2">
+                  <button  class="page-link" v-on:click="pagination(n - 1)">{{ n }}</button>
                 </li>
               </div>
             </ul>
@@ -76,6 +79,7 @@ export default {
     filter: null,
     topics: [],
     totalTopics: 0,
+    currentPage: 1,
     loading: false
   }),
   async mounted(){
@@ -90,9 +94,11 @@ export default {
       this.filter = e.target.value;
       this.topics = topicData.data;
       this.totalTopics = Math.ceil(topicData.metadata.totalRecords / 3);
+      this.currentPage = 1;
     },
     async pagination(num){
       const { data } = await getTopicsAPI(num, this.filter);
+      this.currentPage = num + 1;
       this.topics = data;
     },
     formatDate(value){
