@@ -3,7 +3,7 @@
     <header>
       <div class="container">
         <div class="row pt-5">
-          <div class="col-12 col-md-6 mt-5">
+          <div class="col-12 col-md-6">
             <h1>Want someone to teach you?</h1>
             <p>Suggest a topic for someone to teach you on</p>
             <router-link class="btn primary-color btn-lg" to="/topics">Browse Topics</router-link>
@@ -92,7 +92,7 @@ export default {
 <style scoped>
   header{
     background-color: #54AA63;
-    height: 90vh;
+    min-height: 90vh;
   }
 
   header h1{
@@ -122,5 +122,12 @@ export default {
     font-size: 1.8rem;
     font-weight: 200;
   }
-
+  
+  @media only screen and (max-width: 750px) {
+    header img{
+      margin-top: 2rem;
+      margin-left: 0;
+      margin-bottom: 3rem;
+    }
+  }
 </style>
