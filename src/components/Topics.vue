@@ -44,6 +44,13 @@
 
           <nav aria-label="Page navigation example">
             <ul class="pagination">
+              <li v-if="previousBtn" class="page-item mr-2 disabled">
+                <button class="page-link" v-on:click="pagination(currentPage - 2)" disabled>Previous</button>
+              </li>
+              <li v-else class="page-item mr-2">
+                <button class="page-link" v-on:click="pagination(currentPage - 2)">Previous</button>
+              </li>
+
               <div v-bind:key="n" v-for="n in this.totalTopics">
                 <li v-if="n === currentPage" class="page-item active mr-2">
                   <button class="page-link" v-on:click="pagination(n - 1)">{{ n }}</button>
@@ -52,6 +59,13 @@
                   <button  class="page-link" v-on:click="pagination(n - 1)">{{ n }}</button>
                 </li>
               </div>
+
+              <li v-if="nextBtn" class="page-item disabled">
+                <button class="page-link" v-on:click="pagination(currentPage)" disabled>Next</button>
+              </li>
+               <li v-else class="page-item">
+                <button class="page-link" v-on:click="pagination(currentPage)">Next</button>
+              </li>
             </ul>
           </nav>
         </div>
@@ -80,6 +94,8 @@ export default {
     topics: [],
     totalTopics: 0,
     currentPage: 1,
+    previousBtn: true,
+    nextBtn: false,
     loading: false
   }),
   async mounted(){
@@ -95,11 +111,21 @@ export default {
       this.topics = topicData.data;
       this.totalTopics = Math.ceil(topicData.metadata.totalRecords / 3);
       this.currentPage = 1;
+      this.previousBtn = true;
+      
+      if(this.totalTopics === 1) this.nextBtn = true;
+      else this.nextBtn = false;
     },
     async pagination(num){
       const { data } = await getTopicsAPI(num, this.filter);
       this.currentPage = num + 1;
       this.topics = data;
+
+      if(this.currentPage === 1) this.previousBtn = true;
+      else this.previousBtn = false;
+
+      if(this.currentPage >= this.totalTopics) this.nextBtn = true;
+      else this.nextBtn = false;
     },
     formatDate(value){
       if(value){
