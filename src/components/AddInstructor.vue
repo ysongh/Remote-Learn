@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-4">
-    <div class="card w-50 m-auto">
+    <div class="card m-auto">
       <h2 class="card-header primary-color text-center py-4">Apply to Teach</h2>
       <form class="card-body px-5" @submit="addTopic">
         <div class="form-group">
@@ -93,5 +93,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  
+  .card{
+    max-width: 500px;
+  }
 </style>
