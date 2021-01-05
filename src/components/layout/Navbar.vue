@@ -27,7 +27,12 @@
                             {{ address.substring(0,7)}}...{{ address.substring(35,42) }}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" @click="portis.showPortis()">Open Wallet</a>
+                            <a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" @click="portis.showPortis()">
+                                Open Wallet
+                            </a>
+                            <a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" @click="logout()">
+                                Logout
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -46,7 +51,13 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'Navbar',
   computed: mapGetters(['address', 'portis']),
-  methods: mapActions(['getPortis'])
+  methods: {
+    ...mapActions(['getPortis', 'removeAddress']),
+    logout(){
+        this.portis.logout();
+        this.removeAddress();
+    }
+  }
 }
 </script>
 

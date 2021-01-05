@@ -43,6 +43,9 @@ const actions = {
 		}else{
 			window.alert('Contract is not deployed to detected network.')
 		}
+	},
+	removeAddress({ commit }){
+		commit('setAddress', '');
 	}
 };
 
