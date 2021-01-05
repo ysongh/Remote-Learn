@@ -22,10 +22,17 @@
                     </li>
                 </ul>
                 <div v-if="address">
-                    <button class="btn primary-color" @click="portis.showPortis()">{{ address.substring(0,7)}}...{{ address.substring(35,42) }}</button>
+                    <div class="dropdown">
+                        <button class="btn primary-color dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ address.substring(0,7)}}...{{ address.substring(35,42) }}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" @click="portis.showPortis()">Open Wallet</a>
+                        </div>
+                    </div>
                 </div>
                 <div v-else>
-                    <button class="btn primary-color" @click="getPortis()">Open Wallet</button>
+                    <button class="btn primary-color" @click="getPortis()">Login to your Wallet</button>
                 </div>
             </div>
         </div>
