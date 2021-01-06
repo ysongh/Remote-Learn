@@ -30,7 +30,7 @@
                             <a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" @click="portis.showPortis()">
                                 Open Wallet
                             </a>
-                            <a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" @click="logout()">
+                            <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
                                 Logout
                             </a>
                         </div>
@@ -41,22 +41,23 @@
                 </div>
             </div>
         </div>
+        <LogoutModal></LogoutModal>
     </nav>
 </template>
 
 <script>
-
 import { mapGetters, mapActions } from 'vuex';
+
+import LogoutModal from '../modal/LogoutModal';
 
 export default {
   name: 'Navbar',
+  components: {
+    LogoutModal
+  },
   computed: mapGetters(['address', 'portis']),
   methods: {
-    ...mapActions(['getPortis', 'removeAddress']),
-    logout(){
-        this.portis.logout();
-        this.removeAddress();
-    }
+    ...mapActions(['getPortis']),
   }
 }
 </script>
