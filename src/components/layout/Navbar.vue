@@ -37,7 +37,8 @@
                     </div>
                 </div>
                 <div v-else>
-                    <button class="btn primary-color" @click="getPortis()">Login to your Wallet</button>
+                    <button v-if="loading" class="btn btn-light" @click="loginWithPortis()">Loading...</button>
+                    <button v-else class="btn primary-color" @click="loginWithPortis()">Login to your Wallet</button>
                 </div>
             </div>
         </div>
@@ -55,9 +56,19 @@ export default {
   components: {
     LogoutModal
   },
+  data() {
+    return {
+        loading: false,
+    }
+  },
   computed: mapGetters(['address', 'portis']),
   methods: {
     ...mapActions(['getPortis']),
+    async loginWithPortis(){
+        this.loading = true;
+        await this.getPortis();
+        this.loading = false;
+    }
   }
 }
 </script>
