@@ -46,6 +46,9 @@
                             <a class="dropdown-item" @click="loginWithPortis()">
                                 With Portis
                             </a>
+                            <a class="dropdown-item" @click="loginWithMetaMask()">
+                                With MetaMask
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -72,10 +75,15 @@ export default {
   },
   computed: mapGetters(['address', 'portis']),
   methods: {
-    ...mapActions(['getPortis']),
+    ...mapActions(['getPortis', 'getMetaMask']),
     async loginWithPortis(){
         this.loading = true;
         await this.getPortis();
+        this.loading = false;
+    },
+    async loginWithMetaMask(){
+        this.loading = true;
+        await this.getMetaMask();
         this.loading = false;
     }
   }
