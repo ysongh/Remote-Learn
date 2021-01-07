@@ -37,8 +37,17 @@
                     </div>
                 </div>
                 <div v-else>
-                    <button v-if="loading" class="btn btn-light" @click="loginWithPortis()">Loading...</button>
-                    <button v-else class="btn primary-color" @click="loginWithPortis()">Login to your Wallet</button>
+                    <button v-if="loading" class="btn btn-secondary">Loading...</button>
+                    <div class="dropdown" v-else>
+                        <button class="btn primary-color dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Login to your Wallet
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" @click="loginWithPortis()">
+                                With Portis
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
