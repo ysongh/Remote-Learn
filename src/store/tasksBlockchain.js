@@ -7,13 +7,15 @@ import RemoteLearn from '../abis/RemoteLearn.json';
 const state = {
 	address: '',
 	portis: null,
-	blockchain: null
+	blockchain: null,
+	walletType: ''
 };
 
 const getters = {
 	address: state => state.address,
 	portis: state => state.portis,
-	blockchain: state => state.blockchain
+	blockchain: state => state.blockchain,
+	walletType: state => state.walletType
 };
 
 const actions = {
@@ -27,6 +29,8 @@ const actions = {
 		web3.eth.getAccounts((error, accounts) => {
 			commit('setAddress', accounts[0]);
 		});
+
+		commit('setWalletType', 'Portis');
 
 		const networkId ='42';
 		const networkData = RemoteLearn.networks[networkId];
@@ -60,6 +64,8 @@ const actions = {
 			commit('setAddress', accounts[0]);
 		});
 
+		commit('setWalletType', 'MetaMask');
+
 		const networkId = await web3.eth.net.getId();
 		const networkData = RemoteLearn.networks[networkId];
 
@@ -81,7 +87,8 @@ const actions = {
 const mutations = {
 	setAddress: (state, address) => (state.address = address),
 	setPortis: (state, portis) => (state.portis = portis),
-	setBlockchain: (state, blockchain) => (state.blockchain = blockchain)
+	setBlockchain: (state, blockchain) => (state.blockchain = blockchain),
+	setWalletType: (state, walletType) => (state.walletType = walletType)
 };
 
 export default{

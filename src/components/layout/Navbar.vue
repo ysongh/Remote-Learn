@@ -27,7 +27,7 @@
                             {{ address.substring(0,7)}}...{{ address.substring(35,42) }}
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" @click="portis.showPortis()">
+                            <a v-if="walletType === 'Portis'" class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" @click="portis.showPortis()">
                                 Open Wallet
                             </a>
                             <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
@@ -73,7 +73,7 @@ export default {
         loading: false,
     }
   },
-  computed: mapGetters(['address', 'portis']),
+  computed: mapGetters(['address', 'portis', 'walletType']),
   methods: {
     ...mapActions(['getPortis', 'getMetaMask']),
     async loginWithPortis(){
