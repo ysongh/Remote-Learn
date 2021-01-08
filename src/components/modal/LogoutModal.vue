@@ -3,19 +3,18 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Logout</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="mt-3">Are you sure you want to log out of your portis account?</p>
+                    <p class="mt-3">Are you sure you want to log out of your wallet?</p>
                     <div class="d-flex justify-content-center">
                         <button type="button" class="btn primary-color mr-3" @click="logout()" data-dismiss="modal">Yes</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                     </div>
                 </div>
-                <div class="modal-footer"></div>
+                <div class="modal-footer mb-4"></div>
             </div>
         </div>
     </div>
@@ -27,11 +26,12 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'LogoutModal',
   props: ['amount'],
-  computed: mapGetters(['portis']),
+  computed: mapGetters(['portis', 'walletType']),
   methods: {
     ...mapActions(['getPortis', 'removeAddress']),
     logout(){
-        this.portis.logout();
+        if(this.walletType === 'Portis') this.portis.logout();
+        
         this.removeAddress();
     }
   }
