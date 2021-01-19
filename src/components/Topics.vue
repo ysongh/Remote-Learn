@@ -156,4 +156,13 @@ export default {
     margin-top: 8px;
     margin-right: 4px;
   }
+
+  .page-link{
+    color: #58B368;
+  }
+
+  .page-item.active .page-link{
+    background-color: #58B368;
+    border-color :#58B368;
+  }
 </style>
