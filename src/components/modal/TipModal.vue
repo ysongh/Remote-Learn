@@ -14,8 +14,8 @@
                         <label class="font-weight-bold">Amount</label>
                         <input
                             class="form-control"
-                            type="text"
-                            name="name"
+                            type="number"
+                            name="amount"
                             v-model="localAmount"
                             @change="$emit('update:amount', localAmount)">
                     </div>
@@ -24,7 +24,15 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button v-if="address" type="button" class="btn primary-color" v-on:click="$emit('tip-instructor')" data-dismiss="modal">Send</button>
+                <button
+                    v-if="address"
+                    type="button"
+                    class="btn primary-color"
+                    v-on:click="$emit('tip-instructor')"
+                    data-dismiss="modal"
+                    :disabled=isDisabled>
+                    Send
+                </button>
             </div>
             </div>
         </div>
@@ -37,7 +45,12 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'TipModal',
   props: ['amount'],
-  computed: mapGetters(['address']),
+  computed: {
+        ...mapGetters(['address']),
+        isDisabled() {
+            return this.localAmount <= 0;
+        }
+  },
   data() {
     return {
         localAmount: ''
