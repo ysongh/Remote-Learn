@@ -20,7 +20,18 @@
                             @change="$emit('update:amount', localAmount)">
                     </div>
                 </form>
-                <p v-else class="mt-3">Please log in to your wallet</p>
+
+                <div v-else>
+                    <p class="notlogin-message text-center">Please log in to your wallet</p>
+                    <center>
+                        <button class="btn secondary-color btn-lg mr-4" @click="loginWithPortis()">
+                            Portis
+                        </button>
+                        <button class="btn secondary-color btn-lg" @click="loginWithMetaMask()">
+                            MetaMask
+                        </button>
+                    </center>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -40,7 +51,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'TipModal',
@@ -51,9 +62,19 @@ export default {
             return this.localAmount <= 0;
         }
   },
+  methods: {
+    ...mapActions(['getPortis', 'getMetaMask']),
+    async loginWithPortis(){
+        await this.getPortis();
+    },
+    async loginWithMetaMask(){
+        await this.getMetaMask();
+    }
+  },
   data() {
     return {
-        localAmount: ''
+        localAmount: '',
+        loading: false
     }
   },
 }
@@ -61,5 +82,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+    .notlogin-message{
+        color: #b1af52;
+        font-size: 1.3rem;
+    }
 </style>
