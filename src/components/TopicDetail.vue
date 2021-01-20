@@ -73,6 +73,7 @@
 <script>
 import moment from 'moment';
 import { mapGetters } from 'vuex';
+import $ from "jquery";
 
 import { getTopicByIdAPI } from '../api/topics';
 import { getCommentsByTopicAPI, addCommentAPI, deleteCommentAPI } from '../api/comments';
@@ -124,8 +125,11 @@ export default {
       }
     },
     async tipInstructor(){
-      await this.blockchain.methods.tipInstructor(this.instructorAddress)
+      await this.blockchain.methods
+        .tipInstructor(this.instructorAddress)
         .send({ from: this.address, value: window.web3.utils.toWei(this.amount.toString(), 'Ether')});
+      
+      $("#tipModal").modal("hide");
     },
     setInstructorAddress(instructorAddress){
       this.instructorAddress = instructorAddress;

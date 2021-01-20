@@ -40,7 +40,6 @@
                     type="button"
                     class="btn primary-color"
                     v-on:click="$emit('tip-instructor')"
-                    data-dismiss="modal"
                     :disabled=isDisabled>
                     Send
                 </button>
