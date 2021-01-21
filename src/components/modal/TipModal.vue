@@ -43,7 +43,7 @@
                     class="btn primary-color"
                     v-on:click="$emit('tip-instructor')"
                     :disabled=isDisabled>
-                    Send
+                    {{isPending}}
                 </button>
             </div>
             </div>
@@ -56,11 +56,14 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'TipModal',
-  props: ['amount', 'instructorAddress'],
+  props: ['amount', 'instructorAddress', 'tipLoading'],
   computed: {
         ...mapGetters(['address']),
         isDisabled() {
-            return this.localAmount <= 0;
+            return this.localAmount <= 0 || this.tipLoading;
+        },
+        isPending() {
+            return this.tipLoading ? "Pending" : "Send";
         }
   },
   methods: {

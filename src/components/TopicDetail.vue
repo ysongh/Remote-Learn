@@ -66,7 +66,12 @@
       </div>
     </div>
     <CommentModal @add-comment="addComment" :name.sync="name" :detail.sync="detail"></CommentModal>
-    <TipModal @tip-instructor="tipInstructor"  :instructorAddress="instructorAddress" :amount.sync="amount"></TipModal>
+    <TipModal
+      @tip-instructor="tipInstructor" 
+      :instructorAddress="instructorAddress" 
+      :amount.sync="amount"
+      :tipLoading="tipLoading"
+    ></TipModal>
   </div>
 </template>
 
@@ -95,7 +100,8 @@ export default {
     name: 'Guest',
     detail: '',
     instructorAddress: '',
-    amount: ''
+    amount: '',
+    tipLoading: false
   }),
   async mounted(){
     const { data } = await getTopicByIdAPI(this.$route.params.id);
@@ -125,11 +131,21 @@ export default {
       }
     },
     async tipInstructor(){
-      await this.blockchain.methods
-        .tipInstructor(this.instructorAddress)
-        .send({ from: this.address, value: window.web3.utils.toWei(this.amount.toString(), 'Ether')});
+      try{
+        this.tipLoading = true;
+
+        await this.blockchain.methods
+          .tipInstructor(this.instructorAddress)
+          .send({ from: this.address, value: window.web3.utils.toWei(this.amount.toString(), 'Ether')});
+        
+        $("#tipModal").modal("hide");
+        this.tipLoading = false;
+      }
+      catch(err){
+        console.error(err);
+        this.tipLoading = false;
+      }
       
-      $("#tipModal").modal("hide");
     },
     setInstructorAddress(instructorAddress){
       this.instructorAddress = instructorAddress;
