@@ -66,7 +66,7 @@
       </div>
     </div>
     <CommentModal @add-comment="addComment" :name.sync="name" :detail.sync="detail"></CommentModal>
-    <TipModal @tip-instructor="tipInstructor" :amount.sync="amount"></TipModal>
+    <TipModal @tip-instructor="tipInstructor"  :instructorAddress="instructorAddress" :amount.sync="amount"></TipModal>
   </div>
 </template>
 

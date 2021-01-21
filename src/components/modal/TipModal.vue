@@ -3,7 +3,9 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Tip Instructor</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">
+                    Tip Instructor ({{ instructorAddress.substring(0,7) }}...{{ instructorAddress.substring(35,42) }})
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -54,7 +56,7 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'TipModal',
-  props: ['amount'],
+  props: ['amount', 'instructorAddress'],
   computed: {
         ...mapGetters(['address']),
         isDisabled() {
