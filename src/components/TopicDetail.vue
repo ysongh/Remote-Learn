@@ -6,7 +6,7 @@
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
               <h1>{{ this.topic.length && this.topic[0][6].value  }}</h1>
-              <span class="badge badge-secondary">{{ this.topic.length && this.topic[0][14].value }}</span>
+              <span class="badge badge-pill badge-secondary p-2">{{ this.topic.length && this.topic[0][14].value }}</span>
             </div>
             <p>{{ this.topic.length && this.topic[0][7].value }}</p>
             <p class="text-muted">{{ this.topic.length && formatDate(this.topic[0][1].value, 1) }}</p>

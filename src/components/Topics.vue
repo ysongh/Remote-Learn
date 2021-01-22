@@ -23,16 +23,13 @@
         <div v-if="loading">
           <div v-bind:key="topic[3].value" v-for="topic in topics">
             <div class="jumbotron bg-light py-2 px-3 mb-3">
-              <div class="d-flex justify-content-between">
+              <div class="d-flex justify-content-between align-items-start">
                 <div>
-                  <h2>{{ topic[6].value }} <span class="badge badge-secondary">{{ topic[14].value }}</span></h2>
+                  <h2>{{ topic[6].value }}</h2>
                   <p>{{ topic[7].value }}</p>
                 </div>
                 
-                <div class="d-flex justify-content-end">
-                  <p class="number-size">{{ topic[8].value }}</p>
-                  <img class="icon" src="../assets/person-icon.svg" alt="Person">
-                </div>
+                <span class="badge badge-pill badge-secondary mt-2 p-2">{{ topic[14].value }}</span>
               </div>
 
               <div class="d-flex justify-content-between align-items-center">
