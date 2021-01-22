@@ -12,7 +12,7 @@
           <div v-bind:key="type" v-for="type of types">
             <div class="form-check">
               <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="radiotype" :value="type" @change="selectType">{{type}}
+                <input type="radio" class="form-check-input" name="radiotype" :value="type" v-model="filter" @click="selectType">{{type}}
               </label>
             </div>
           </div>
@@ -106,8 +106,16 @@ export default {
   },
   methods: { 
     async selectType(e){
-      const topicData = await getTopicsAPI(0, e.target.value);
-      this.filter = e.target.value;
+      let topicData;
+      if(this.filter == e.target.value){
+        topicData = await getTopicsAPI(0, null);
+        this.filter = null;
+      }
+      else{
+        topicData = await getTopicsAPI(0, e.target.value);
+        this.filter = e.target.value;
+      }
+
       this.topics = topicData.data;
       this.totalTopics = Math.ceil(topicData.metadata.totalRecords / 3);
       this.currentPage = 1;
