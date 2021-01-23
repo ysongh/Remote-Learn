@@ -13,11 +13,12 @@
         </div>
         <div class="form-group">
           <label class="font-weight-bold">Type</label>
-          <input
-            class="form-control"
-            type="text"
-            name="type"
+          <select
+            class="custom-select"
             v-model="type">
+            <option>None</option>
+            <option v-for="type of types" v-bind:key="type" :value="type">{{type}}</option>
+          </select>
         </div>
         <div class="form-group">
           <label class="font-weight-bold">Detail</label>
@@ -40,6 +41,7 @@ import { addTopicAPI } from '../api/topics';
 export default {
   name: 'AddTopic',
   data: () => ({
+    types: ["Programming", "Math", "English", "History", "Science", "Music"],
     title: "",
     type: "",
     detail: ""
@@ -57,7 +59,6 @@ export default {
       const isSuccess = await addTopicAPI(newTopic);
 
       if(isSuccess) this.$router.push('topics');
-      
     }
   }
 }
