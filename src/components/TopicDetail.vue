@@ -16,7 +16,7 @@
 
         <div class="card mb-3">
           <div class="card-body">
-            <h2>Instructor</h2>
+            <h2>Instructors</h2>
             <div v-bind:key="instructor[3].value" v-for="instructor in instructors">
               <div class="d-flex justify-content-between align-items-start mb-3">
                 <div>
@@ -32,9 +32,9 @@
                     Tip
                   </button>
                 </div>
-                
               </div>
             </div>
+            <p v-if="!instructors.length">No instructor yet</p>
           </div>
         </div>
       </div>
@@ -61,6 +61,8 @@
               </div>
               <hr>
             </div>
+
+            <p v-if="!comments.length">No comment yet</p>
           </div>
         </div>
       </div>
