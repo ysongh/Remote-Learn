@@ -6,6 +6,7 @@ import Topics from '../components/Topics.vue'
 import AddTopic from '../components/AddTopic.vue'
 import AddInstructor from '../components/AddInstructor.vue'
 import TopicDetail from '../components/TopicDetail.vue'
+import SignIn from '../components/SignIn.vue'
 
 Vue.use(VueRouter)
 
@@ -19,6 +20,11 @@ Vue.use(VueRouter)
     path: '/topics',
     name: 'Topics',
     component: Topics
+  },
+  {
+    path: '/signin',
+    name: 'SignIn',
+    component: SignIn
   },
   {
     path: '/addtopic',
