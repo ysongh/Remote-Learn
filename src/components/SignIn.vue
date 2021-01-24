@@ -2,7 +2,7 @@
   <div class="container mt-4">
     <div class="card m-auto">
       <h2 class="card-header primary-color text-center py-4">Sign In</h2>
-      <form class="card-body px-5">
+      <form class="card-body px-5" @submit="signIn">
         <div class="form-group">
           <label class="font-weight-bold">Email</label>
           <input
@@ -27,13 +27,23 @@
 </template>
 
 <script>
+import { signInAPI } from '../api/users';
 
 export default {
   name: 'SignIn',
   data: () => ({
     email: "",
     password: "",
-  })
+  }),
+  methods:{
+    async signIn(e){
+      e.preventDefault();
+
+      const isSuccess = await signInAPI(this.email, this.password);
+
+      if(isSuccess) this.$router.push('topics');
+    }
+  }
 }
 </script>
 
