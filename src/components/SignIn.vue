@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 import { signInAPI, registerAPI } from '../api/users';
 
 export default {
@@ -36,17 +38,22 @@ export default {
     password: "",
   }),
   methods:{
+    ...mapActions(["login"]),
     async signIn(e){
       e.preventDefault();
 
       const isSuccess = await signInAPI(this.email, this.password);
+      this.login(isSuccess);
 
       if(isSuccess) this.$router.push('topics');
     },
     async register(){
       const isSuccess = await registerAPI(this.email, this.password);
 
-      if(isSuccess) this.$router.push('topics');
+      if(isSuccess){
+        this.login(this.email);
+        this.$router.push('topics');
+      }
     }
   }
 }

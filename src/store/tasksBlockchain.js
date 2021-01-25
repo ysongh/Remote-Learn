@@ -8,14 +8,16 @@ const state = {
 	address: '',
 	portis: null,
 	blockchain: null,
-	walletType: ''
+	walletType: '',
+	email: ''
 };
 
 const getters = {
 	address: state => state.address,
 	portis: state => state.portis,
 	blockchain: state => state.blockchain,
-	walletType: state => state.walletType
+	walletType: state => state.walletType,
+	email: state => state.email
 };
 
 const actions = {
@@ -81,6 +83,9 @@ const actions = {
 	},
 	removeAddress({ commit }){
 		commit('setAddress', '');
+	},
+	login({ commit }, email){
+		commit('setEmail', email);
 	}
 };
 
@@ -88,7 +93,8 @@ const mutations = {
 	setAddress: (state, address) => (state.address = address),
 	setPortis: (state, portis) => (state.portis = portis),
 	setBlockchain: (state, blockchain) => (state.blockchain = blockchain),
-	setWalletType: (state, walletType) => (state.walletType = walletType)
+	setWalletType: (state, walletType) => (state.walletType = walletType),
+	setEmail: (state, email) => (state.email = email)
 };
 
 export default{

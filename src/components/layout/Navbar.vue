@@ -17,8 +17,11 @@
                     <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <router-link class="nav-link" to="/topics">Topics</router-link>
                     </li>
-                    <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                    <li v-if="!email" class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <router-link class="nav-link" to="/signin">Sign In</router-link>
+                    </li>
+                    <li v-else class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                        <router-link class="nav-link" to="/">{{email}}</router-link>
                     </li>
                 </ul>
                 <div v-if="address">
@@ -73,7 +76,7 @@ export default {
         loading: false,
     }
   },
-  computed: mapGetters(['address', 'portis', 'walletType']),
+  computed: mapGetters(['address', 'portis', 'walletType', 'email']),
   methods: {
     ...mapActions(['getPortis', 'getMetaMask']),
     async loginWithPortis(){

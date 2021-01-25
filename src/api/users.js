@@ -22,13 +22,13 @@ export const signInAPI = async (email, password) => {
         });
         const { data } = await res.json();
 
-        if(!data.length) return false;
-        if(data[0][7].value === password) return true;
+        if(!data.length) return null;
+        if(data[0][7].value === password) return data[0][6].value;
         
-        return false;
+        return null;
     } catch(err) {
         console.error(err);
-        return false;
+        return null;
     }
 }
 
