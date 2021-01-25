@@ -20,14 +20,14 @@
             v-model="password">
         </div>
         <input type="submit" value="Sign In" class="btn primary-color btn-block btn-lg">
-        <button class="btn btn-secondary btn-block btn-lg">Create Account</button>
+        <button class="btn btn-secondary btn-block btn-lg" @click="register()">Create Account</button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
-import { signInAPI } from '../api/users';
+import { signInAPI, registerAPI } from '../api/users';
 
 export default {
   name: 'SignIn',
@@ -40,6 +40,11 @@ export default {
       e.preventDefault();
 
       const isSuccess = await signInAPI(this.email, this.password);
+
+      if(isSuccess) this.$router.push('topics');
+    },
+    async register(){
+      const isSuccess = await registerAPI(this.email, this.password);
 
       if(isSuccess) this.$router.push('topics');
     }
