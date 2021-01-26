@@ -7,6 +7,7 @@ import AddTopic from '../components/AddTopic.vue'
 import AddInstructor from '../components/AddInstructor.vue'
 import TopicDetail from '../components/TopicDetail.vue'
 import SignIn from '../components/SignIn.vue'
+import Profile from '../components/Profile.vue'
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,11 @@ Vue.use(VueRouter)
     path: '/addtopic',
     name: 'AddTopic',
     component: AddTopic
+  },
+  {
+    path: '/profile/:email',
+    name: 'Profile',
+    component: Profile
   },
   {
     path: '/addinstructor/:id',

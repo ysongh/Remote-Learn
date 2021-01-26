@@ -21,7 +21,7 @@
                         <router-link class="nav-link" to="/signin">Sign In</router-link>
                     </li>
                     <li v-else class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                        <router-link class="nav-link" to="/">{{email}}</router-link>
+                        <router-link class="nav-link" :to="{ path: '/profile/'+ email}">{{email}}</router-link>
                     </li>
                 </ul>
                 <div v-if="address">
