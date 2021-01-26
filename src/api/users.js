@@ -102,3 +102,34 @@ export const getChannelAddressAPI = async (id) => {
         return null;
     }
 }
+
+export const createChannelAPI = async (userId, channelAddress) => {
+    try{
+        const res = await fetch(url2, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify({
+                "to":"bq68yx9vp",
+                "data": [
+                    {
+                        "6": {
+                          "value": userId
+                        },
+                        "7": {
+                          "value": channelAddress
+                        }
+                    }
+                ],
+                "fieldsToReturn":[6,7]
+            })
+        });
+        const { data }  = await res.json();
+        console.log(data)
+        if (res.ok) {
+            return true;
+        }
+    } catch(err) {
+        console.error(err);
+        return false;
+    }
+}
