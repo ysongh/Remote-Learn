@@ -60,6 +60,27 @@ export const registerAPI = async (email, password) => {
     }
 }
 
+export const getUserIdByEmailAPI = async (email) => {
+    try{
+        const res = await fetch(url1, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify({
+                "from":"bq63pu96d",
+                "where":`{6.CT.${email}}`,
+                "select":[3]
+            })
+        });
+        const { data } = await res.json();
+        if(!data.length) return null;
+        
+        return data[0][3].value;
+    } catch(err) {
+        console.error(err);
+        return null;
+    }
+}
+
 export const getChannelAddressAPI = async (id) => {
     try{
         const res = await fetch(url1, {

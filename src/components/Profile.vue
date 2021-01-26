@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import { getChannelAddressAPI } from '../api/users';
+import { getUserIdByEmailAPI, getChannelAddressAPI } from '../api/users';
 
 export default {
   name: 'Profile',
   async mounted(){
-    let id = 1;
-    await getChannelAddressAPI(id);
+    const userId = await getUserIdByEmailAPI(this.$route.params.email);
+    await getChannelAddressAPI(userId);
   }
 }
 </script>
