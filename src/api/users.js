@@ -59,3 +59,25 @@ export const registerAPI = async (email, password) => {
         return false;
     }
 }
+
+export const getChannelAddressAPI = async (id) => {
+    try{
+        const res = await fetch(url1, {
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify({
+                "from":"bq68yx9vp",
+                "where":`{6.CT.${id}}`,
+                "select":[7]
+            })
+        });
+        const { data }  = await res.json();
+
+        console.log(data[0][7].value);
+        
+        return null;
+    } catch(err) {
+        console.error(err);
+        return null;
+    }
+}
