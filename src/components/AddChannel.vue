@@ -27,12 +27,23 @@ export default {
   }),
   methods:{
     async addTopic(e){
-      e.preventDefault();
+        e.preventDefault();
 
-      const userId = await getUserIdByEmailAPI(this.$route.params.email);
-      const isSuccess = await createChannelAPI(userId, this.address);
+        const res = await fetch('http://localhost:5001/api/v1/channels', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "partner_address": this.address,
+                "token_address": "0x8AA23bF3065edF4e8748FE9cCb76CD41BA75574E",
+            })
+        });
+        const data = await res.json();
+        console.log(data)
 
-      if(isSuccess) this.$router.push('/profile/' + this.$route.params.email);
+        const userId = await getUserIdByEmailAPI(this.$route.params.email);
+        const isSuccess = await createChannelAPI(userId, this.address);
+
+        if(isSuccess) this.$router.push('/profile/' + this.$route.params.email);
     }
   }
 }
