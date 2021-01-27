@@ -94,7 +94,9 @@ export const getChannelAddressAPI = async (id) => {
         });
         const { data }  = await res.json();
 
-        console.log(data[0][7].value);
+        if(data.length){
+            return data[0][7].value;
+        }
         
         return null;
     } catch(err) {
