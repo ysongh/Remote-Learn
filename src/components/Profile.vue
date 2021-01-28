@@ -4,11 +4,23 @@
         <router-link v-if="!channel && this.email == this.$route.params.email" class="btn primary-color" :to="{ path: '/addchannel/'+ this.$route.params.email}">
           Create Channel
         </router-link>
-        <p v-if="channel">Balance: {{balance}}</p>
+        <div class="card bg-light mb-3" v-if="channel">
+          <div class="card-body">
+            <p>Address: {{channelData ? channelData.partner_address : ''}}</p>
+            <p>Balance: {{balance}}</p>
+          </div>
+        </div>
+        
         <div v-if="this.email && this.email !== this.$route.params.email && channel">
-          <button class="btn primary-color" @click="depositToken(10)">
-            Give 10 Teach Token
-          </button>
+          <h2 class="h3">Send Teach Token</h2>
+          
+          <div class="d-flex flex-wrap">
+            <div v-for="n in 10" :key="n">
+              <button class="btn primary-color mr-3 mb-3" @click="depositToken(n * 5)">
+                Give {{n * 5}}
+              </button>
+            </div>
+          </div>
         </div>
     </div>
 </template>
@@ -21,7 +33,8 @@ export default {
   name: 'Profile',
   data: () => ({
     channel: null,
-    balance: 0
+    balance: 0,
+    channelData: null
   }),
   async mounted(){
     const userId = await getUserIdByEmailAPI(this.$route.params.email);
@@ -31,6 +44,8 @@ export default {
     const res = await fetch('http://localhost:5001/api/v1/channels/0x8AA23bF3065edF4e8748FE9cCb76CD41BA75574E/' + this.channel);
     const data = await res.json();
     this.balance = data.balance;
+    this.channelData = data;
+    console.log(data);
   },
   computed: mapGetters(['email']),
   methods:{

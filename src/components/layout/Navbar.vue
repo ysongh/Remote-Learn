@@ -24,7 +24,7 @@
                         <router-link class="nav-link" :to="{ path: '/profile/'+ email}">{{email}}</router-link>
                     </li>
                     <li v-if="email" class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                        <p @click="logout()">Logout</p>
+                        <span class="nav-link" @click="logout()">Logout</span>
                     </li>
                 </ul>
                 <div v-if="address">
