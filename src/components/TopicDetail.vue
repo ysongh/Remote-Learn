@@ -22,7 +22,7 @@
                 <div>
                   <img src="../assets/defaultuser.png" alt="User">
                   <div class="instructor-info">
-                    <p>{{ instructor[7].value }}</p>
+                    <router-link :to="{ path: '/profile/'+ instructor[8].value}">{{ instructor[7].value }}</router-link>
                     <p>Start: {{ instructor[10].value }} at {{ instructor[12].value }}</p>
                     <p>Link: {{ instructor[14].value }}</p>
                   </div>

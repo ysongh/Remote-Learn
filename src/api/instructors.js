@@ -17,7 +17,7 @@ export const getInstructorByTopicAPI = async (id) => {
                     },
                 ],
                 "where":`{6.CT.${id}}`,
-                "select":[1,3,6,7,10,12,14,16]
+                "select":[1,3,6,7,8,10,12,14,16]
             })
         });
         const data = await res.json();
