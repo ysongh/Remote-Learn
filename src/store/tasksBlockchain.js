@@ -86,6 +86,9 @@ const actions = {
 	},
 	login({ commit }, email){
 		commit('setEmail', email);
+	},
+	logout({ commit }){
+		commit('setEmail', '');
 	}
 };
 

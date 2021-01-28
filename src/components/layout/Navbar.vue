@@ -20,8 +20,11 @@
                     <li v-if="!email" class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <router-link class="nav-link" to="/signin">Sign In</router-link>
                     </li>
-                    <li v-else class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                    <li v-if="email" class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <router-link class="nav-link" :to="{ path: '/profile/'+ email}">{{email}}</router-link>
+                    </li>
+                    <li v-if="email" class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                        <p @click="logout()">Logout</p>
                     </li>
                 </ul>
                 <div v-if="address">
@@ -78,7 +81,7 @@ export default {
   },
   computed: mapGetters(['address', 'portis', 'walletType', 'email']),
   methods: {
-    ...mapActions(['getPortis', 'getMetaMask']),
+    ...mapActions(['getPortis', 'getMetaMask', 'logout']),
     async loginWithPortis(){
         this.loading = true;
         await this.getPortis();
