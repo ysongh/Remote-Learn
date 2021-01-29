@@ -1,40 +1,45 @@
 <template>
     <div class="profile container mt-3">
         <h1>Profile for {{this.$route.params.email}}</h1>
+
         <router-link v-if="!channel && this.email == this.$route.params.email" class="btn primary-color" :to="{ path: '/addchannel/'+ this.$route.params.email}">
           Create Channel
         </router-link>
-        <div class="card bg-light mb-3" v-if="channel">
-          <div class="card-body">
-            <p>Address: {{channelData ? channelData.partner_address : ''}}</p>
-            <p>Balance: {{balance}}</p>
-          </div>
-        </div>
-        
-        <div v-if="this.email && this.email !== this.$route.params.email && channel">
-          <h2 class="h3">Send Teach Token</h2>
-          
-          <div class="d-flex flex-wrap">
-            <div v-for="n in numbers" :key="n">
-              <button class="btn primary-color mr-3 mb-3" @click="depositToken(n)">
-                Give {{n}}
-              </button>
-            </div>
-          </div>
-        </div>
 
-        <div v-if="this.email === this.$route.params.email && channel">
-          <div class="form-group">
-            <label class="font-weight-bold">Withdraw Token</label>
-            <input
-              class="form-control"
-              type="number"
-              name="Withdraw Amount"
-              v-model="withdrawAmount">
-          </div>
-          <button class="btn primary-color" @click="withdrawToken()">Withdraw</button>
-        </div>
+        <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="card bg-light mb-3" v-if="channel">
+                <div class="card-body">
+                  <p>Address: {{channelData ? channelData.partner_address : ''}}</p>
+                  <p>Balance: {{balance}}</p>
+                </div>
+              </div>
         
+              <div v-if="this.email && this.email !== this.$route.params.email && channel">
+                <h2 class="h3">Send Teach Token</h2>
+                
+                <div class="d-flex flex-wrap">
+                  <div v-for="n in numbers" :key="n">
+                    <button class="btn primary-color mr-3 mb-3" @click="depositToken(n)">
+                      Give {{n}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div v-if="this.email === this.$route.params.email && channel">
+                <div class="form-group">
+                  <label class="font-weight-bold">Withdraw Token</label>
+                  <input
+                    class="form-control"
+                    type="number"
+                    name="Withdraw Amount"
+                    v-model="withdrawAmount">
+                </div>
+                <button class="btn primary-color" @click="withdrawToken()">Withdraw</button>
+              </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -85,7 +90,8 @@ export default {
       });
       const data = await res.json();
       console.log(data);
-      this.balance = data.balance;
+      this.balance -= this.withdrawAmount;
+      this.withdrawAmount = 0;
     }
   }
 }
