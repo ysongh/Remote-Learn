@@ -15,9 +15,9 @@
           <h2 class="h3">Send Teach Token</h2>
           
           <div class="d-flex flex-wrap">
-            <div v-for="n in 10" :key="n">
-              <button class="btn primary-color mr-3 mb-3" @click="depositToken(n * 5)">
-                Give {{n * 5}}
+            <div v-for="n in numbers" :key="n">
+              <button class="btn primary-color mr-3 mb-3" @click="depositToken(n)">
+                Give {{n}}
               </button>
             </div>
           </div>
@@ -32,6 +32,7 @@ import { getUserIdByEmailAPI, getChannelAddressAPI } from '../api/users';
 export default {
   name: 'Profile',
   data: () => ({
+    numbers: [1, 5, 10, 25, 50, 100, 250, 500, 1000],
     channel: null,
     balance: 0,
     channelData: null
