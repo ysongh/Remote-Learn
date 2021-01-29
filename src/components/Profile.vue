@@ -22,6 +22,19 @@
             </div>
           </div>
         </div>
+
+        <div v-if="this.email === this.$route.params.email && channel">
+          <div class="form-group">
+            <label class="font-weight-bold">Withdraw Token</label>
+            <input
+              class="form-control"
+              type="number"
+              name="Withdraw Amount"
+              v-model="withdrawAmount">
+          </div>
+          <button class="btn primary-color" @click="withdrawToken()">Withdraw</button>
+        </div>
+        
     </div>
 </template>
 
@@ -35,7 +48,8 @@ export default {
     numbers: [1, 5, 10, 25, 50, 100, 250, 500, 1000],
     channel: null,
     balance: 0,
-    channelData: null
+    channelData: null,
+    withdrawAmount: 0
   }),
   async mounted(){
     const userId = await getUserIdByEmailAPI(this.$route.params.email);
@@ -59,6 +73,18 @@ export default {
         })
       });
       const data = await res.json();
+      this.balance = data.balance;
+    },
+    async withdrawToken(){
+      const res = await fetch('http://localhost:5001/api/v1/channels/0x8AA23bF3065edF4e8748FE9cCb76CD41BA75574E/' + this.channel, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            "total_withdraw": this.withdrawAmount
+        })
+      });
+      const data = await res.json();
+      console.log(data);
       this.balance = data.balance;
     }
   }
