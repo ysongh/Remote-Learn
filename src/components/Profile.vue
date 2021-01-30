@@ -77,33 +77,43 @@ export default {
   methods:{
     async depositToken(amount){
       this.loading = true;
-
-      const res = await fetch('http://localhost:5001/api/v1/channels/0x8AA23bF3065edF4e8748FE9cCb76CD41BA75574E/' + this.channel, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            "total_deposit": amount
-        })
-      });
-      const data = await res.json();
-      this.balance = data.balance;
-      this.loading = false;
+      try{
+        const res = await fetch('http://localhost:5001/api/v1/channels/0x8AA23bF3065edF4e8748FE9cCb76CD41BA75574E/' + this.channel, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+              "total_deposit": amount
+          })
+        });
+        const data = await res.json();
+        this.balance = data.balance;
+        this.loading = false;
+      }
+      catch(err){
+        console.error(err);
+        this.loading = false;
+      }
     },
     async withdrawToken(){
       this.loading = true;
-
-      const res = await fetch('http://localhost:5001/api/v1/channels/0x8AA23bF3065edF4e8748FE9cCb76CD41BA75574E/' + this.channel, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            "total_withdraw": this.withdrawAmount
-        })
-      });
-      const data = await res.json();
-      console.log(data);
-      this.balance -= this.withdrawAmount;
-      this.withdrawAmount = 0;
-      this.loading = false;
+      try{
+        const res = await fetch('http://localhost:5001/api/v1/channels/0x8AA23bF3065edF4e8748FE9cCb76CD41BA75574E/' + this.channel, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+              "total_withdraw": this.withdrawAmount
+          })
+        });
+        const data = await res.json();
+        console.log(data);
+        this.balance -= this.withdrawAmount;
+        this.withdrawAmount = 0;
+        this.loading = false;
+      }
+      catch(err){
+        console.error(err);
+        this.loading = false;
+      }
     }
   }
 }
