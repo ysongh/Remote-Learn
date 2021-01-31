@@ -2,9 +2,13 @@
     <div class="profile container mt-3">
         <h1>Profile for {{this.$route.params.email}}</h1>
 
-        <router-link v-if="!channel && this.email == this.$route.params.email" class="btn primary-color" :to="{ path: '/addchannel/'+ this.$route.params.email}">
-          Create Channel
-        </router-link>
+        <div v-if="!channel && this.email == this.$route.params.email">
+           <router-link  class="btn primary-color" :to="{ path: '/addchannel/'+ this.$route.params.email}">
+            Create Channel
+          </router-link>
+          <p class="text-muted">Earn token by creating a channel</p>
+        </div>
+       
 
         <div class="row">
             <div class="col-12 col-md-6">
@@ -82,7 +86,7 @@ export default {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-              "total_deposit": amount
+              "total_deposit": +amount + +this.balance
           })
         });
         const data = await res.json();

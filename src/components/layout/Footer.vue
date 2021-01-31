@@ -1,6 +1,6 @@
 <template>
    <footer class="primary-color p-4 mt-5 text-center">
-        Copyright &copy; 2020 Remote Learn
+        Copyright &copy; 2021 Remote Learn
     </footer>
 </template>
 
