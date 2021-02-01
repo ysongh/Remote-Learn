@@ -1,10 +1,22 @@
 # Remote Learn
 An web app where learners can suggest a topic for an expert to teach them
 
+- Demo - https://youtu.be/1jtcFDX0R8A
+
 ## Technologies
 - Vue
 - Bootstrap 4
+- Solidity
+- Portis
+- Raiden
 - Quickbase
+
+## Features
+- Learners can create a topic that they would like the instructor to cover
+- Instructor can select a topic to teach and pick a date and link for remote class
+- Learners can tip instructor with cryptocurrency
+- Learners can use Portis as an alternative wallet provider
+- Payments can be made between learners and instructors using Raiden
 
 ## Project setup
 - Run
@@ -22,21 +34,5 @@ export const headers = {
     'Content-Type': 'application/json'
 }
 ```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Run `truffle migrate` to deploy the contract
+- Run `npm run serve` to start the web app
